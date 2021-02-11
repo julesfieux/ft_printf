@@ -6,13 +6,13 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 13:13:51 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/11 14:22:07 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_fillin_strmin(t_struct *info, t_size *size, char *tmp, char *arg)
+char	*ft_fillin_strmin(t_size *size, char *tmp, char *arg)
 {
 	int		i;
 	int		len_arg;
@@ -27,11 +27,14 @@ char	*ft_fillin_strmin(t_struct *info, t_size *size, char *tmp, char *arg)
 	len_arg = ft_strlen(arg);
 	i = 0;
 	while (i < len_arg)
-		tmp[i] = arg[i++];
+	{
+		tmp[i] = arg[i];
+		i++;
+	}
 	return (tmp);
 }
 
-char	*ft_fillin_othermin(t_struct *info, t_size *size, char *tmp, char *arg)
+char	*ft_fillin_othermin(t_size *size, char *tmp, char *arg)
 {
 	int		i;
 	int		f;
@@ -52,7 +55,7 @@ char	*ft_fillin_othermin(t_struct *info, t_size *size, char *tmp, char *arg)
 	return (tmp);
 }
 
-char	*ft_fillin_str(t_struct *info, t_size *size, char *tmp, char *arg)
+char	*ft_fillin_str(t_size *size, char *tmp, char *arg)
 {
 	int		i;
 	int		f;
@@ -68,7 +71,7 @@ char	*ft_fillin_str(t_struct *info, t_size *size, char *tmp, char *arg)
 	return (tmp);
 }
 
-char	*ft_fillin_other(t_struct *info, t_size *size, char *tmp, char *arg)
+char	*ft_fillin_other(t_size *size, char *tmp, char *arg)
 {
 	int		i;
 	int		f;

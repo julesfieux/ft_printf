@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 13:37:43 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/11 15:33:53 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct	s_struct
 {
@@ -62,10 +61,10 @@ int				ft_nb_space(char *flag, int *i);
 int				ft_atoi(char *str);
 int				ft_nb_zero(char *flag, int i);
 int				ft_init_res(t_struct *info, char *flag, char *arg);
-char			*ft_fillin_strmin(t_struct *info, t_size *size, char *tmp, char *arg);
-char			*ft_fillin_othermin(t_struct *info, t_size *size, char *tmp, char *arg);
-char			*ft_fillin_str(t_struct *info, t_size *size, char *tmp, char *arg);
-char			*ft_fillin_other(t_struct *info, t_size *size, char *tmp, char *arg);
+char			*ft_fillin_strmin(t_size *size, char *tmp, char *arg);
+char			*ft_fillin_othermin(t_size *size, char *tmp, char *arg);
+char			*ft_fillin_str(t_size *size, char *tmp, char *arg);
+char			*ft_fillin_other(t_size *size, char *tmp, char *arg);
 char			*ft_strjoin(char *s1, char *s2);
 
 

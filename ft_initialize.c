@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 13:14:51 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/11 15:25:41 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ char	*ft_init_flag(int len_flag, t_struct *info)
 	if (info->letter == 'c' || info->letter == 'p')
 		if (!(flag = ft_verif_cp(flag, len_flag, info)))
 			return (NULL);
-	else if (info->letter == 'i' || info->letter == 'd')
+	if (info->letter == 'i' || info->letter == 'd')
 		if (!(flag = ft_verif_id(flag, len_flag, info, 1)))
 			return (NULL);
-	else if (info->letter == 'u' || info->letter == 'x' || info->letter == 'X')
+	if (info->letter == 'u' || info->letter == 'x' || info->letter == 'X')
 		if (!(flag = ft_verif_uxX(flag, len_flag, info, 1)))
 			return (NULL);
-	else if (info->letter == '%')
+	if (info->letter == '%')
 		if (!(flag = ft_verif_modulo(flag, len_flag, info, 1)))
 			return (NULL);
 	return (flag);
@@ -101,17 +101,17 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 		return (0);
 	if (info->minus == 1)
 	{
-		if (info->letter = 's')
-			tmp = ft_fillin_strmin(info, size, tmp, arg);
+		if (info->letter == 's')
+			tmp = ft_fillin_strmin(size, tmp, arg);
 		else
-			tmp = ft_fillin_othermin(info, size, tmp, arg);
+			tmp = ft_fillin_othermin(size, tmp, arg);
 	}
 	else
 	{
-		if (info->letter = 's')
-			tmp = ft_fillin_str(info, size, tmp, arg);
+		if (info->letter == 's')
+			tmp = ft_fillin_str(size, tmp, arg);
 		else
-			tmp = ft_fillin_other(info, size, tmp, arg);
+			tmp = ft_fillin_other(size, tmp, arg);
 	}
 	if (!(info->res = ft_strjoin(info->res, tmp)))
 		return (0);
