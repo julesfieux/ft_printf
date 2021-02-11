@@ -6,16 +6,16 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 10:48:14 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/11 13:16:07 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_free()
+/*int		ft_free()
 {
 	
-}
+}*/
 
 int		ft_parsing(t_struct *info, va_list param)
 {
@@ -62,6 +62,6 @@ int		ft_printf(const char *data, ...)
 	write(1, info->res, ft_strlen(info->res));
 	va_end(param);
 	len = ft_strlen(info->res);
-	ft_free(); //A faire!!!
+	//ft_free(); A faire!!!
 	return (len);
 }

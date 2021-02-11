@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 10:46:56 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/11 12:10:37 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,6 @@ int		str_len_flag(t_struct *info)
 	}
 	info->letter = info->data[info->cnt];
 	return (len_flag);
-}
-
-char	*ft_malres(long int num, char *res, int *i)
-{
-	if (num == 0)
-		(*i)++;
-	if (num < 0)
-	{
-		(*i)++;
-		num = -num;
-	}
-	while (num > 0)
-	{
-		(*i)++;
-		num = num / 10;
-	}
-	if (!(res = malloc(sizeof(char) * ((*i) + 1))))
-		return (0);
-	res[*i] = '\0';
-	(*i)--;
-	return (res);
 }
 
 char	*ft_init_int(long int num, char *res, int i)
@@ -92,4 +71,47 @@ char	*ft_init_int_hexa(long int num, char *res, int maj, int i)
 		}
 	}
 	return (res);
+}
+
+int		ft_nb_space(char *flag, int *i)
+{
+	char	*temp;
+	int		nb;
+
+	while (flag[(*i)] >= '0' && flag[(*i)] <= '9')
+		(*i)++;
+	if (!(temp = malloc(sizeof(char) * ((*i) + 1))))
+		return (-1);
+	*i = 0;
+	while (flag[(*i)] >= '0' && flag[(*i)] <= '9')
+	{
+		temp[(*i)] = flag[(*i)];
+		(*i)++;
+	}
+	temp[(*i)] = '\0';
+	nb = ft_atoi(temp);
+	free(temp);
+	return (nb);
+}
+
+int		ft_nb_zero(char *flag, int i)
+{
+	char	*temp;
+	int		f;
+
+	f = 0;
+	while (flag[i] >= '0' && flag[i++] <= '9')
+		f++;
+	if (!f)
+		return (0);
+	if (!(temp = malloc(sizeof(char) * (f + 1))))
+		return (-1);
+	i = i - f;
+	f = 0;
+	while (flag[i] >= '0' && flag[i] <= '9')
+		temp[f++] = flag[i++];
+	temp[f] = '\0';
+	i = ft_atoi(temp);
+	free(temp);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 10:43:16 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/11 13:14:51 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_init_flag(int len_flag, t_struct *info)
 	return (flag);
 }
 
-char	*ft_arg_decript(t_struct *info, va_list param)
+char	*ft_init_arg(t_struct *info, va_list param)
 {
 	//info->data[info->cnt] est sur la letter
 	char	*arg;
@@ -88,4 +88,32 @@ char	*ft_arg_decript(t_struct *info, va_list param)
 	if (!i) //si il y a une erreur i=0 et on renvoie NULL
 		return (NULL);
 	return (arg);
+}
+
+int		ft_init_res(t_struct *info, char *flag, char *arg)
+{
+	t_size	*size;
+	char	*tmp;
+
+	if (!(size = malloc(sizeof(t_size))))
+		return (0);
+	if (!(tmp = ft_malloc_tmp(size, info, flag, arg)))
+		return (0);
+	if (info->minus == 1)
+	{
+		if (info->letter = 's')
+			tmp = ft_fillin_strmin(info, size, tmp, arg);
+		else
+			tmp = ft_fillin_othermin(info, size, tmp, arg);
+	}
+	else
+	{
+		if (info->letter = 's')
+			tmp = ft_fillin_str(info, size, tmp, arg);
+		else
+			tmp = ft_fillin_other(info, size, tmp, arg);
+	}
+	if (!(info->res = ft_strjoin(info->res, tmp)))
+		return (0);
+	return (1);
 }

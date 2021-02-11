@@ -6,18 +6,20 @@
 #    By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/16 15:04:16 by jfieux            #+#    #+#              #
-#    Updated: 2021/02/10 15:58:59 by jfieux           ###   ########.fr        #
+#    Updated: 2021/02/11 13:43:32 by jfieux           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= libftprintf.a
 
 SRCS			=	ft_printf.c \
+					custom_toolbox.c \
+					toolbox.c \
+					ft_fillin.c \
+					ft_initialise.c \
+					ft_malloc.c \
 					ft_treating.c \
-					ft_tools.c \
-					ft_tools_decript.c \
-					ft_tools_parse.c \
-					ft_tools_treat.c
+					ft_verification.c
 OBJS			= $(SRCS:.c=.o)
 
 BONUS			=	
