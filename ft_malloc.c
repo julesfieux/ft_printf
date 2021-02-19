@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:52:21 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 15:46:13 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/19 16:18:30 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,19 @@ char	*ft_malres(long int num, char *res, int *i)
 char	*ft_malloc_tmp(t_size *size, t_struct *info, char *flag, char *arg)
 {
 	int i;
+	int s;
 	char *tmp;
 
 	i = 0;
+	s = 0;
 	size->nbz = 0;
-	if ((size->nbs = ft_nb_space(flag, &i)) < 0)
+	while (flag[s] == '-' || flag[s] == '+')
+		s++;
+	if ((size->nbs = ft_nb_space(flag, &i, s)) < 0)
 		return (NULL);
 	if (info->letter != 's')
-		if (flag[i] == '.')
-			if ((size->nbz = ft_nb_zero(flag, (i + 1))) < 0)
+		if (flag[i + s] == '.')
+			if ((size->nbz = ft_nb_zero(flag, (i + 1), s)) < 0)
 				return (NULL);
 	size->biggest = size->nbs;
 	if (size->nbz > size->biggest)

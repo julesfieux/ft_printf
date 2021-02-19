@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 15:46:07 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/19 16:19:02 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,19 @@ char	*ft_init_int_hexa(long int num, char *res, int maj, int i)
 	return (res);
 }
 
-int		ft_nb_space(char *flag, int *i)
+int		ft_nb_space(char *flag, int *i, int s)
 {
 	char	*temp;
 	int		nb;
 
-	while (flag[(*i)] >= '0' && flag[(*i)] <= '9')
+	while (flag[(*i) + s] >= '0' && flag[(*i) + s] <= '9')
 		(*i)++;
 	if (!(temp = malloc(sizeof(char) * ((*i) + 1))))
 		return (-1);
 	*i = 0;
-	while (flag[(*i)] >= '0' && flag[(*i)] <= '9')
+	while (flag[(*i) + s] >= '0' && flag[(*i) + s] <= '9')
 	{
-		temp[(*i)] = flag[(*i)];
+		temp[(*i)] = flag[(*i) + s];
 		(*i)++;
 	}
 	temp[(*i)] = '\0';
@@ -94,13 +94,13 @@ int		ft_nb_space(char *flag, int *i)
 	return (nb);
 }
 
-int		ft_nb_zero(char *flag, int i)
+int		ft_nb_zero(char *flag, int i, int s)
 {
 	char	*temp;
 	int		f;
 
 	f = 0;
-	while (flag[i] >= '0' && flag[i++] <= '9')
+	while (flag[i + s] >= '0' && flag[s + i++] <= '9')
 		f++;
 	if (!f)
 		return (0);
@@ -108,8 +108,8 @@ int		ft_nb_zero(char *flag, int i)
 		return (-1);
 	i = i - f;
 	f = 0;
-	while (flag[i] >= '0' && flag[i] <= '9')
-		temp[f++] = flag[i++];
+	while (flag[i + s] >= '0' && flag[i + s] <= '9')
+		temp[f++] = flag[s + i++];
 	temp[f] = '\0';
 	i = ft_atoi(temp);
 	free(temp);
