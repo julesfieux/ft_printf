@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:57:17 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 13:20:30 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/19 14:28:15 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		res[j++] = s2[i++];
 	res[j] = '\0';
+	free(s2);
 	free(s1);
 	return (res);
 }

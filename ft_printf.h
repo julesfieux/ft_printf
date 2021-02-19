@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 15:33:53 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/16 11:21:57 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct	s_struct
 {
@@ -46,7 +47,6 @@ char			*ft_init_flag(int len_flag, t_struct *info);
 char			*ft_verif_cp(char *flag, int len_flag, t_struct *info);
 char			*ft_verif_id(char *flag, int len_flag, t_struct *info, int i);
 char			*ft_verif_uxX(char *flag, int len_flag, t_struct *info, int i);
-char			*ft_verif_modulo(char *flag, int len_flag, t_struct *info, int i);
 char			*ft_init_arg(t_struct *info, va_list param);
 int				ft_treat_char(char c, char **arg);
 int				ft_treat_str(char *str, char **arg);

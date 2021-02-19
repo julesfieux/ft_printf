@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/11 15:25:41 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/19 14:28:59 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int		ft_init_text(t_struct *info)
 			tmp[i++] = info->data[info->cnt++];
 		tmp[i] = '\0';
 		if (!(info->res = ft_strjoin(info->res, tmp)))
+		{
+			free(tmp);
 			return (0);
+		}
 	}
 	return (1);
 }
@@ -49,16 +52,22 @@ char	*ft_init_flag(int len_flag, t_struct *info)
 	len_flag--;
 	if (info->letter == 'c' || info->letter == 'p')
 		if (!(flag = ft_verif_cp(flag, len_flag, info)))
+		{
+			free(flag);
 			return (NULL);
-	if (info->letter == 'i' || info->letter == 'd')
+		}
+	if (info->letter == 'i' || info->letter == 'd' || info->letter == '%')
 		if (!(flag = ft_verif_id(flag, len_flag, info, 1)))
+		{
+			free(flag);
 			return (NULL);
+		}
 	if (info->letter == 'u' || info->letter == 'x' || info->letter == 'X')
 		if (!(flag = ft_verif_uxX(flag, len_flag, info, 1)))
+		{
+			free(flag);
 			return (NULL);
-	if (info->letter == '%')
-		if (!(flag = ft_verif_modulo(flag, len_flag, info, 1)))
-			return (NULL);
+		}
 	return (flag);
 }
 
@@ -71,19 +80,19 @@ char	*ft_init_arg(t_struct *info, va_list param)
 	i = 0;
 	if (info->letter == 'c')
 		i = ft_treat_char(va_arg(param, int), &arg);
-	else if (info->letter == 's')
+	if (info->letter == 's')
 		i = ft_treat_str(va_arg(param, char *), &arg);
-	else if (info->letter == 'p')
+	if (info->letter == 'p')
 		i = ft_treat_pointer(va_arg(param, unsigned long long), &arg);
-	else if (info->letter == 'd' || info->letter == 'i')
+	if (info->letter == 'd' || info->letter == 'i')
 		i = ft_treat_int(va_arg(param, int), &arg);
-	else if (info->letter == 'u')
+	if (info->letter == 'u')
 		i = ft_treat_int(va_arg(param, unsigned int), &arg);
-	else if (info->letter == 'x')
+	if (info->letter == 'x')
 		i = ft_treat_hexa(va_arg(param, unsigned int), &arg, 0);
-	else if (info->letter == 'X')
+	if (info->letter == 'X')
 		i = ft_treat_hexa(va_arg(param, unsigned int), &arg, 1);
-	else if (info->letter == '%')
+	if (info->letter == '%')
 		i = ft_treat_char('%', &arg);
 	if (!i) //si il y a une erreur i=0 et on renvoie NULL
 		return (NULL);
@@ -98,7 +107,10 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 	if (!(size = malloc(sizeof(t_size))))
 		return (0);
 	if (!(tmp = ft_malloc_tmp(size, info, flag, arg)))
+	{
+		free(size);
 		return (0);
+	}
 	if (info->minus == 1)
 	{
 		if (info->letter == 's')
@@ -113,7 +125,11 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 		else
 			tmp = ft_fillin_other(size, tmp, arg);
 	}
+	free(size);
 	if (!(info->res = ft_strjoin(info->res, tmp)))
+	{
+		free(tmp);
 		return (0);
+	}
 	return (1);
 }
