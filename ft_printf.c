@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/19 16:28:21 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/22 10:29:03 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,17 @@ int		ft_parsing(t_struct *info, va_list param)
 
 	while (info->data[info->cnt])
 	{
-		if (!(ft_init_text(info))) //info->cnt = % ou \0 
+		if (!(ft_init_text(info))) //info->cnt = % ou \0      om
 			return (-1);
 		if (info->data[info->cnt] == '%')
 		{
 			len_flag = str_len_flag(info);
-			if (!(flag = ft_init_flag(len_flag, info)))
+			if (!(flag = ft_init_flag(len_flag, info))) // free
 				return (-1);
-			if (!(arg = ft_init_arg(info, param)))
-			{
-				free(flag);
+			if (!(arg = ft_init_arg(info, param))) // om
 				return (-1);
-			}
-			if (!(ft_init_res(info, flag, arg)))
-			{
-				free(flag);
-				free(arg);
+			if (!(ft_init_res(info, flag, arg))) // om
 				return (-1);
-			}
 			free(flag);
 			free(arg);
 			info->cnt++;
