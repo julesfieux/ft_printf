@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:57:17 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/19 14:28:15 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/22 11:58:49 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
-int		ft_isletter(char c) //return 1 si 'c' est une letter
+int		ft_isletter(char c)
 {
 	const char	letter[10] = "cspdiuxX\%";
 	int			i;

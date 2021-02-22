@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/19 16:15:21 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/22 11:50:38 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				ft_isletter(char c);
 char			*ft_init_flag(int len_flag, t_struct *info);
 char			*ft_verif_cp(char *flag, int len_flag, t_struct *info);
 char			*ft_verif_id(char *flag, int len_flag, t_struct *info, int i);
-char			*ft_verif_uxX(char *flag, int len_flag, t_struct *info, int i);
+int				ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i);
 char			*ft_init_arg(t_struct *info, va_list param);
 int				ft_treat_char(char c, char **arg);
 int				ft_treat_str(char *str, char **arg);

@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/22 10:28:03 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/22 12:01:04 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_init_text(t_struct *info)
 		while (i < cnt)
 			tmp[i++] = info->data[info->cnt++];
 		tmp[i] = '\0';
-		if (!(info->res = ft_strjoin(info->res, tmp))) //om
+		if (!(info->res = ft_strjoin(info->res, tmp)))
 			return (0);
 	}
 	return (1);
@@ -48,19 +48,20 @@ char	*ft_init_flag(int len_flag, t_struct *info)
 	flag[len_flag] = '\0';
 	len_flag--;
 	if (info->letter == 'c' || info->letter == 'p')
-		if (!(flag = ft_verif_cp(flag, len_flag, info))) // free
+		if (!(flag = ft_verif_cp(flag, len_flag, info)))
 		{
 			free(flag);
 			return (NULL);
 		}
 	if (info->letter == 'i' || info->letter == 'd' || info->letter == '%')
-		if (!(flag = ft_verif_id(flag, len_flag, info, 1))) // free
+		if (!(flag = ft_verif_id(flag, len_flag, info, 1)))
 		{
 			free(flag);
 			return (NULL);
 		}
-	if (info->letter == 'u' || info->letter == 'x' || info->letter == 'X')
-		if (!(flag = ft_verif_uxX(flag, len_flag, info, 1))) // free
+	if (info->letter == 's' || info->letter == 'x' || info->letter == 'X' ||
+	info->letter == 'u')
+		if (ft_verif_suxX(&flag, len_flag, info, 1) != 0)
 		{
 			free(flag);
 			return (NULL);
@@ -70,7 +71,6 @@ char	*ft_init_flag(int len_flag, t_struct *info)
 
 char	*ft_init_arg(t_struct *info, va_list param)
 {
-	//info->data[info->cnt] est sur la letter
 	char	*arg;
 	int		i;
 
@@ -91,7 +91,7 @@ char	*ft_init_arg(t_struct *info, va_list param)
 		i = ft_treat_hexa(va_arg(param, unsigned int), &arg, 1);
 	if (info->letter == '%')
 		i = ft_treat_char('%', &arg);
-	if (!i) //si il y a une erreur i=0 et on renvoie NULL     // om
+	if (!i)
 		return (NULL);
 	return (arg);
 }
@@ -103,7 +103,7 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 
 	if (!(size = malloc(sizeof(t_size))))
 		return (0);
-	if (!(tmp = ft_malloc_tmp(size, info, flag, arg))) // om
+	if (!(tmp = ft_malloc_tmp(size, info, flag, arg)))
 		return (0);
 	if (info->minus == 1)
 	{
@@ -120,7 +120,7 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 			tmp = ft_fillin_other(size, tmp, arg);
 	}
 	free(size);
-	if (!(info->res = ft_strjoin(info->res, tmp))) // om
+	if (!(info->res = ft_strjoin(info->res, tmp)))
 		return (0);
 	return (1);
 }

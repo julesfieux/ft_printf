@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:46:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/19 16:27:35 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/22 11:59:46 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ char	*ft_verif_id(char *flag, int len_flag, t_struct *info, int i)
 	return (flag);
 }
 
-char	*ft_verif_uxX(char *flag, int len_flag, t_struct *info, int i)
+int		ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i)
 {
+	char	*flag;
+	flag = *flag_ref;
 	while (info->data[info->cnt - i] >= '0' && info->data[info->cnt - i] <= '9')
 	{
 		flag[len_flag--] = info->data[info->cnt - i];
@@ -86,6 +88,7 @@ char	*ft_verif_uxX(char *flag, int len_flag, t_struct *info, int i)
 		i++;
 	}
 	if (len_flag >= 0)
-		return (NULL);
-	return (flag);
+		return (-1);
+	*flag_ref = flag;
+	return (0);
 }
