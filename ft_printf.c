@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/22 12:02:22 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/23 12:12:52 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		ft_printf(const char *data, ...)
 	}
 	va_end(param);
 	len = ft_strlen(info->res);
-	write(1, info->res, ft_strlen(info->res));
+	write(1, info->res, len);
 	free(info->data);
 	free(info->res);
 	free(info);

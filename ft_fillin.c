@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/22 12:01:59 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/23 12:20:28 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ char	*ft_fillin_other(t_size *size, char *tmp, char *arg)
 		tmp[i--] = '0';
 		size->nbz--;
 	}
-	while (tmp[i])
+	if (i < 0)
+		i = 0;
+	while (tmp[i] != '\0')
 		i++;
 	f = i - ft_strlen(arg);
 	i = 0;
