@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/23 11:20:44 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/23 16:34:25 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ char			*ft_strjoin(char *s1, char *s2);
 int				str_len_flag(t_struct *info);
 int				ft_isletter(char c);
 char			*ft_init_flag(int len_flag, t_struct *info);
-char			*ft_verif_cp(char *flag, int len_flag, t_struct *info);
-char			*ft_verif_id(char *flag, int len_flag, t_struct *info, int i);
+int				ft_verif_cp(char **flag_ref, int len_flag, t_struct *info);
+int				ft_verif_id(char **flag_ref, int len_flag, t_struct *info, int i);
 int				ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i);
 char			*ft_init_arg(t_struct *info, va_list param);
 int				ft_treat_char(char c, char **arg);
@@ -62,9 +62,11 @@ int				ft_atoi(char *str);
 int				ft_nb_zero(char *flag, int i, int s);
 int				ft_init_res(t_struct *info, char *flag, char *arg);
 char			*ft_fillin_strmin(t_size *size, char *tmp, char *arg);
+char			*ft_fillin_intmin(t_size *size, char *tmp, char *arg);
 char			*ft_fillin_othermin(t_size *size, char *tmp, char *arg);
 char			*ft_fillin_str(t_size *size, char *tmp, char *arg);
 char			*ft_fillin_other(t_size *size, char *tmp, char *arg);
+char			*ft_fillin_int(t_size *size, char *tmp, char *arg);
 char			*ft_strjoin(char *s1, char *s2);
 
 

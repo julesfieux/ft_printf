@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/23 12:12:38 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/23 16:03:28 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ char	*ft_init_flag(int len_flag, t_struct *info)
 	flag[len_flag] = '\0';
 	len_flag--;
 	if (info->letter == 'c' || info->letter == 'p')
-		if (!(flag = ft_verif_cp(flag, len_flag, info)))
+		if (ft_verif_cp(&flag, len_flag, info) != 0)
 		{
 			free(flag);
 			return (NULL);
 		}
 	if (info->letter == 'i' || info->letter == 'd' || info->letter == '%')
-		if (!(flag = ft_verif_id(flag, len_flag, info, 1)))
+		if (ft_verif_id(&flag, len_flag, info, 1) != 0)
 		{
 			free(flag);
 			return (NULL);
@@ -109,6 +109,8 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 	{
 		if (info->letter == 's')
 			tmp = ft_fillin_strmin(size, tmp, arg);
+		else if (info->letter == 'i' || info->letter == 'd')
+			tmp = ft_fillin_intmin(size, tmp, arg);
 		else
 			tmp = ft_fillin_othermin(size, tmp, arg);
 	}
@@ -116,6 +118,8 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 	{
 		if (info->letter == 's')
 			tmp = ft_fillin_str(size, tmp, arg);
+		else if (info->letter == 'i' || info->letter == 'd')
+			tmp = ft_fillin_int(size, tmp, arg);
 		else
 			tmp = ft_fillin_other(size, tmp, arg);
 	}
