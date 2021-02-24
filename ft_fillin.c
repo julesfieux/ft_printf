@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/23 16:40:42 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/24 11:42:18 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*ft_fillin_strmin(t_size *size, char *tmp, char *arg)
 	while (i < size->biggest)
 		tmp[i++] = ' ';
 	len_arg = ft_strlen(arg);
+	if (size->pnt == 1 && size->nbz < len_arg)
+		len_arg = size->nbz;
 	i = 0;
 	while (i < len_arg)
 	{
@@ -62,9 +64,19 @@ char	*ft_fillin_str(t_size *size, char *tmp, char *arg)
 	while (i < size->biggest)
 		tmp[i++] = ' ';
 	f = i - ft_strlen(arg);
-	i = 0;
-	while (arg[i])
-		tmp[f++] = arg[i++];
+	if (size->pnt == 1 && size->nbz < ft_strlen(arg))
+	{
+		f = i - size->nbz;
+		i = 0;
+		while (i < size->nbz)
+			tmp[f++] = arg[i++];
+	}
+	else
+	{
+		i = 0;
+		while (arg[i])
+			tmp[f++] = arg[i++];
+	}
 	return (tmp);
 }
 

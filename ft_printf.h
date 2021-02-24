@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/23 16:34:25 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/24 11:19:57 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_struct
 
 typedef struct	s_size
 {
+	int 		pnt;
 	int			nbs;
 	int			nbz;
 	int			biggest;

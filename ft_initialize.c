@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/23 16:03:28 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/24 11:22:35 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 
 	if (!(size = malloc(sizeof(t_size))))
 		return (0);
+	size->pnt = 0;
 	if (!(tmp = ft_malloc_tmp(size, info, flag, arg)))
 		return (0);
 	if (info->minus == 1)
