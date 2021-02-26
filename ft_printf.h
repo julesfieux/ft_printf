@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/26 10:02:54 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 10:32:54 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_struct
 	int			plus;
 	int			minus;
 	char		letter;
+	int			i;
 }				t_struct;
 
 typedef struct	s_size
@@ -58,9 +59,9 @@ char			*ft_init_int(long int num, char *res, int i);
 int				ft_treat_hexa(long int nb, char **arg, int maj);
 char			*ft_init_int_hexa(long int num, char *res, int maj, int i);
 char			*ft_malloc_tmp(t_size *size, t_struct *info, char *arg);
-int				ft_nb_space(char *flag, int *i, int s, va_list param);
+int				ft_nb_space(char *flag, t_struct *info, int s, va_list param);
 int				ft_atoi(char *str);
-int				ft_nb_zero(char *flag, int i, int s, va_list param);
+int				ft_nb_zero(char *flag, t_struct *info, int s, va_list param);
 int				ft_init_res(t_struct *info, char *flag, va_list param);
 char			*ft_fillin_strmin(t_size *size, char *tmp, char *arg);
 char			*ft_fillin_intmin(t_size *size, char *tmp, char *arg);
