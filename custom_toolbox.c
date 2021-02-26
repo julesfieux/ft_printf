@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/23 12:13:19 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 10:05:03 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,45 +75,58 @@ char	*ft_init_int_hexa(long int num, char *res, int maj, int i)
 	return (res);
 }
 
-int		ft_nb_space(char *flag, int *i, int s)
+int		ft_nb_space(char *flag, int *i, int s, va_list param)
 {
 	char	*temp;
 	int		nb;
 
-	while (flag[(*i) + s] >= '0' && flag[(*i) + s] <= '9')
-		(*i)++;
-	if (!(temp = malloc(sizeof(char) * ((*i) + 1))))
-		return (-1);
-	*i = 0;
-	while (flag[(*i) + s] >= '0' && flag[(*i) + s] <= '9')
+	if (flag[(*i) + s] == '*')
 	{
-		temp[(*i)] = flag[(*i) + s];
 		(*i)++;
+		nb = va_arg(param, int);
 	}
-	temp[(*i)] = '\0';
-	nb = ft_atoi(temp);
-	free(temp);
+	else
+	{
+		while (flag[(*i) + s] >= '0' && flag[(*i) + s] <= '9')
+			(*i)++;
+		if (!(temp = malloc(sizeof(char) * ((*i) + 1))))
+			return (-1);
+		*i = 0;
+		while (flag[(*i) + s] >= '0' && flag[(*i) + s] <= '9')
+		{
+			temp[(*i)] = flag[(*i) + s];
+			(*i)++;
+		}
+		temp[(*i)] = '\0';
+		nb = ft_atoi(temp);
+		free(temp);
+	}
 	return (nb);
 }
 
-int		ft_nb_zero(char *flag, int i, int s)
+int		ft_nb_zero(char *flag, int i, int s, va_list param)
 {
 	char	*temp;
 	int		f;
 
 	f = 0;
-	while (flag[i + s] >= '0' && flag[s + i++] <= '9')
-		f++;
-	if (!f)
-		return (0);
-	if (!(temp = malloc(sizeof(char) * (f + 1))))
-		return (-1);
-	i = i - f;
-	f = 0;
-	while (flag[i + s] >= '0' && flag[i + s] <= '9')
-		temp[f++] = flag[s + i++];
-	temp[f] = '\0';
-	i = ft_atoi(temp);
-	free(temp);
+	if (flag[i + s] == '*')
+		i = va_arg(param, int);
+	else
+	{
+		while (flag[i + s] >= '0' && flag[s + i++] <= '9')
+			f++;
+		if (!f)
+			return (0);
+		if (!(temp = malloc(sizeof(char) * (f + 1))))
+			return (-1);
+		i = i - f;
+		f = 0;
+		while (flag[i + s] >= '0' && flag[i + s] <= '9')
+			temp[f++] = flag[s + i++];
+		temp[f] = '\0';
+		i = ft_atoi(temp);
+		free(temp);
+	}
 	return (i);
 }

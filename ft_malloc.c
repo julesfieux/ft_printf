@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:52:21 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/24 11:31:12 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 10:02:33 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,15 @@ char	*ft_malres(long int num, char *res, int *i)
 	return (res);
 }
 
-char	*ft_malloc_tmp(t_size *size, t_struct *info, char *flag, char *arg)
+char	*ft_malloc_tmp(t_size *size, t_struct *info, char *arg)
 {
-	int i;
-	int s;
 	char *tmp;
 
-	i = 0;
-	s = 0;
-	size->nbz = 0;
-	while (flag[s] == '-' || flag[s] == '+')
-		s++;
-	if ((size->nbs = ft_nb_space(flag, &i, s)) < 0)
-		return (NULL);
 	size->biggest = size->nbs;
 	if (info->letter == 's')
 	{
-		if (flag[i + s] == '.')
+		if (size->pnt == 1)
 		{
-			size->pnt = 1;
-printf("2\n");
-			if ((size->nbz = ft_nb_zero(flag, (i + 1), s)) < 0)
-				return (NULL);
 			if (size->nbz < ft_strlen(arg) && size->nbz > size->nbs)
 				size->biggest = size->nbz;
 			else if (ft_strlen(arg) > size->nbs && size->nbz > size->nbs)
@@ -66,9 +53,6 @@ printf("2\n");
 	}
 	else
 	{
-		if (flag[i + s] == '.')
-			if ((size->nbz = ft_nb_zero(flag, (i + 1), s)) < 0)
-				return (NULL);
 		if (size->nbz > size->biggest)
 			size->biggest = size->nbz;
 		if (ft_strlen(arg) > size->biggest)
@@ -77,7 +61,6 @@ printf("2\n");
 		&& size->nbs <= size->nbz && size->nbs <= ft_strlen(arg))
 			size->biggest++;
 	}
-	printf("size->biggest = %d\n", size->biggest);
 	if (!(tmp = malloc(sizeof(char) * (size->biggest + 1))))
 		return (NULL);
 	return (tmp);

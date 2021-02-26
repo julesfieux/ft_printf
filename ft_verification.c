@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:46:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/23 15:34:47 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/24 14:58:48 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,20 @@ int		ft_verif_cp(char **flag_ref, int len_flag, t_struct *info)
 
 	flag = *flag_ref;
 	i = 1;
-	while (info->data[info->cnt - i] <= '9' && info->data[info->cnt - i] >= '0')
+	if (info->data[info->cnt - i] == '*')
 	{
 		flag[len_flag] = info->data[info->cnt - i];
 		len_flag--;
 		i++;
+	}
+	else
+	{
+		while (info->data[info->cnt - i] <= '9' && info->data[info->cnt - i] >= '0')
+		{
+			flag[len_flag] = info->data[info->cnt - i];
+			len_flag--;
+			i++;
+		}
 	}
 	while (info->data[info->cnt - i] == '-')
 	{
@@ -42,20 +51,35 @@ int		ft_verif_id(char **flag_ref, int len_flag, t_struct *info, int i)
 	char	*flag;
 
 	flag = *flag_ref;
-	while (len_flag >= 0 && (info->data[info->cnt - i] >= '0' && info->data[info->cnt - i] <= '9'))
+	if (info->data[info->cnt - i] == '*')
 	{
 		flag[len_flag--] = info->data[info->cnt - i];
 		i++;
+	}
+	else
+	{
+		while (info->data[info->cnt - i] >= '0' && info->data[info->cnt - i] <= '9')
+		{
+			flag[len_flag--] = info->data[info->cnt - i];
+			i++;
+		}
 	}
 	if (info->data[info->cnt - i] == '.')
 	{
 		flag[len_flag--] = info->data[info->cnt - i];
 		i++;
-		while (info->data[info->cnt - i] >= '0' &&
-		info->data[info->cnt - i] <= '9')
+		if (info->data[info->cnt - i] == '*')
 		{
 			flag[len_flag--] = info->data[info->cnt - i];
 			i++;
+		}
+		else
+		{
+			while (info->data[info->cnt - i] >= '0' && info->data[info->cnt - i] <= '9')
+			{
+				flag[len_flag--] = info->data[info->cnt - i];
+				i++;
+			}
 		}
 	}
 	while (len_flag >= 0 && (info->data[info->cnt - i] == '-' || info->data[info->cnt - i] == '+'))
@@ -74,20 +98,36 @@ int		ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i)
 	char	*flag;
 
 	flag = *flag_ref;
-	while (info->data[info->cnt - i] >= '0' && info->data[info->cnt - i] <= '9')
+	if (info->data[info->cnt - i] == '*')
 	{
 		flag[len_flag--] = info->data[info->cnt - i];
 		i++;
+	}
+	else
+	{
+		while (info->data[info->cnt - i] >= '0' && info->data[info->cnt - i] <= '9')
+		{
+			flag[len_flag--] = info->data[info->cnt - i];
+			i++;
+		}
 	}
 	if (info->data[info->cnt - i] == '.')
 	{
 		flag[len_flag--] = info->data[info->cnt - i];
 		i++;
-		while (info->data[info->cnt - i] >= '0' &&
-		info->data[info->cnt - i] <= '9')
+		if (info->data[info->cnt - i] == '*')
 		{
 			flag[len_flag--] = info->data[info->cnt - i];
 			i++;
+		}
+		else
+		{
+			while (info->data[info->cnt - i] >= '0' &&
+			info->data[info->cnt - i] <= '9')
+			{
+				flag[len_flag--] = info->data[info->cnt - i];
+				i++;
+			}
 		}
 	}
 	while (info->data[info->cnt - i] == '-')

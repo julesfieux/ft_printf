@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/24 11:22:35 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 10:05:31 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,33 @@ char	*ft_init_arg(t_struct *info, va_list param)
 	return (arg);
 }
 
-int		ft_init_res(t_struct *info, char *flag, char *arg)
+int		ft_init_res(t_struct *info, char *flag, va_list param)
 {
+	int i;
+	int s;
 	t_size	*size;
 	char	*tmp;
+	char	*arg;
 
+	i = 0;
+	s = 0;
 	if (!(size = malloc(sizeof(t_size))))
 		return (0);
 	size->pnt = 0;
-	if (!(tmp = ft_malloc_tmp(size, info, flag, arg)))
+	size->nbz = 0;
+	while (flag[s] == '-' || flag[s] == '+')
+		s++;
+	if ((size->nbs = ft_nb_space(flag, &i, s, param)) < 0)
+		return (0);
+	if (flag[i + s] == '.')
+	{
+		size->pnt = 1;
+		if ((size->nbz = ft_nb_zero(flag, (i + 1), s, param)) < 0)
+			return (0);
+	}
+	if (!(arg = ft_init_arg(info, param)))
+		return (-1);
+	if (!(tmp = ft_malloc_tmp(size, info, arg)))
 		return (0);
 	if (info->minus == 1)
 	{
@@ -124,6 +142,7 @@ int		ft_init_res(t_struct *info, char *flag, char *arg)
 		else
 			tmp = ft_fillin_other(size, tmp, arg);
 	}
+	free(arg);
 	free(size);
 	if (!(info->res = ft_strjoin(info->res, tmp)))
 		return (0);
