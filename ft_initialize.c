@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/26 10:36:35 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 16:58:23 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_init_text(t_struct *info)
 		while (i < cnt)
 			tmp[i++] = info->data[info->cnt++];
 		tmp[i] = '\0';
-		if (!(info->res = ft_strjoin(info->res, tmp)))
+		if (!(info->res = ft_strjoin(info->res, tmp, info)))
 			return (0);
 	}
 	return (1);
@@ -121,7 +121,15 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 			return (0);
 	}
 	if (!(arg = ft_init_arg(info, param)))
-		return (-1);
+	{
+		free (size);
+		return (0);
+	}
+	if (info->letter == 'c' && arg[0] == '\0' && size->nbs > 0)
+	{
+		size->nbs--;
+		info->len++;
+	}
 	if (!(tmp = ft_malloc_tmp(size, info, arg)))
 		return (0);
 	if (info->minus == 1)
@@ -144,7 +152,7 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 	}
 	free(arg);
 	free(size);
-	if (!(info->res = ft_strjoin(info->res, tmp)))
+	if (!(info->res = ft_strjoin(info->res, tmp, info)))
 		return (0);
 	return (1);
 }

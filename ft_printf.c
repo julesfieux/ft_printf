@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/26 10:37:05 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 17:18:49 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int		ft_parsing(t_struct *info, va_list param)
 			if (!(flag = ft_init_flag(len_flag, info)))
 				return (-1);
 			if (!(ft_init_res(info, flag, param)))
+			{
+				free (flag);
 				return (-1);
+			}
 			free(flag);
 			info->cnt++;
 		}
@@ -54,6 +57,7 @@ t_struct	*ft_init_struct(const char *data, int len)
 		return (NULL);
 	info->res[0] = '\0';
 	info->cnt = 0;
+	info->len = 0;
 	return (info);
 }
 
@@ -79,6 +83,7 @@ int		ft_printf(const char *data, ...)
 	write(1, info->res, len);
 	free(info->data);
 	free(info->res);
+	len = info->len;
 	free(info);
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:46:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/24 14:58:48 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 11:11:41 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int		ft_verif_cp(char **flag_ref, int len_flag, t_struct *info)
 
 	flag = *flag_ref;
 	i = 1;
+	if (info->data[info->cnt - i] == '.')
+	{
+		flag[len_flag] = info->data[info->cnt - i];
+		len_flag--;
+		i++;
+	}
 	if (info->data[info->cnt - i] == '*')
 	{
 		flag[len_flag] = info->data[info->cnt - i];

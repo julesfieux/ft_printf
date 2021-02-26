@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/26 10:32:54 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 11:47:18 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_struct
 	int			minus;
 	char		letter;
 	int			i;
+	int			len;
 }				t_struct;
 
 typedef struct	s_size
@@ -42,7 +43,6 @@ int				ft_printf(const char *data, ...);
 int				ft_strlen(char *str);
 int				ft_parsing(t_struct *info, va_list param);
 int				ft_init_text(t_struct *info);
-char			*ft_strjoin(char *s1, char *s2);
 int				str_len_flag(t_struct *info);
 int				ft_isletter(char c);
 char			*ft_init_flag(int len_flag, t_struct *info);
@@ -69,7 +69,7 @@ char			*ft_fillin_othermin(t_size *size, char *tmp, char *arg);
 char			*ft_fillin_str(t_size *size, char *tmp, char *arg);
 char			*ft_fillin_other(t_size *size, char *tmp, char *arg);
 char			*ft_fillin_int(t_size *size, char *tmp, char *arg);
-char			*ft_strjoin(char *s1, char *s2);
+char			*ft_strjoin(char *s1, char *s2, t_struct *info);
 
 
 #endif

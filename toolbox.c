@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:57:17 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/23 10:59:58 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/02/26 15:41:26 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ft_atoi(char *str)
 	return (res * sign);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2, t_struct *info)
 {
 	int		len;
 	char	*res;
@@ -71,6 +71,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		res[j++] = s2[i++];
 	res[j] = '\0';
+	info->len = info->len + ft_strlen(s2);
+	if (s2[0] == '\0' && info->letter == 'c')
+		info->len++;
 	free(s2);
 	free(s1);
 	return (res);
