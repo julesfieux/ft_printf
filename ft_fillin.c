@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/24 11:42:18 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/01 16:11:09 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_fillin_strmin(t_size *size, char *tmp, char *arg)
 	return (tmp);
 }
 
-char	*ft_fillin_othermin(t_size *size, char *tmp, char *arg)
+char	*ft_fillin_othermin(t_struct *info, t_size *size, char *tmp, char *arg)
 {
 	int		i;
 	int		f;
@@ -49,8 +49,14 @@ char	*ft_fillin_othermin(t_size *size, char *tmp, char *arg)
 	if (size->nbz > ft_strlen(arg))
 		f = i - ft_strlen(arg);
 	i = 0;
-	while (arg[i])
-		tmp[f++] = arg[i++];
+	if (info->letter == 'c' && !arg[0])
+	{
+		info->co = f;
+		tmp[f++] = ' ';
+	}
+	else
+		while (arg[i])
+			tmp[f++] = arg[i++];
 	return (tmp);
 }
 
@@ -80,7 +86,7 @@ char	*ft_fillin_str(t_size *size, char *tmp, char *arg)
 	return (tmp);
 }
 
-char	*ft_fillin_other(t_size *size, char *tmp, char *arg)
+char	*ft_fillin_other(t_struct *info, t_size *size, char *tmp, char *arg)
 {
 	int		i;
 	int		f;
@@ -101,6 +107,11 @@ char	*ft_fillin_other(t_size *size, char *tmp, char *arg)
 		i++;
 	f = i - ft_strlen(arg);
 	i = 0;
+	if (info->letter == 'c' && !arg[0])
+	{
+		info->co = f - 1;
+		return (tmp);
+	}
 	while (arg[i])
 		tmp[f++] = arg[i++];
 	return (tmp);
@@ -135,6 +146,8 @@ char	*ft_fillin_intmin(t_size *size, char *tmp, char *arg)
 		f++;
 		i++;
 	}
+	if (arg[0] == '0' && size->pnt == 1)
+		return (tmp);
 	while (arg[i])
 		tmp[f++] = arg[i++];
 	return (tmp);
@@ -168,6 +181,8 @@ char	*ft_fillin_int(t_size *size, char *tmp, char *arg)
 		f++;
 		i++;
 	}
+	if (arg[0] == '0' && size->pnt == 1)
+		return (tmp);
 	while (arg[i])
 		tmp[f++] = arg[i++];
 	return (tmp);

@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/26 11:08:40 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/01 11:55:35 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,41 @@ int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
 		info->minus = 1;
 	}
 	return (info->i);
+}
+
+int		ft_z_co(t_struct *info)
+{
+	int i;
+	int *tmp;
+
+	i = 0;
+	while (info->z_co[i] >= 0)
+		i++;
+	if (!(tmp = malloc(sizeof(int) * (i + 2))))
+		return (0);
+	i = 0;
+	while (info->z_co[i] >= 0)
+	{
+		tmp[i] = info->z_co[i];
+		i++;
+	}
+	tmp[i] = info->co + ft_strlen(info->res);
+	tmp[i + 1] = -1;
+	free (info->z_co);
+	info->z_co = tmp;
+	return (1);
+}
+
+int		ft_is_z_co(int *z_co, int i)
+{
+	int f;
+
+	f = 0;
+	while (z_co[f] >= 0)
+	{
+		if (i == z_co[f])
+			return (1);
+		f++;
+	}
+	return (0);
 }

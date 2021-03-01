@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/26 16:58:23 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/01 16:09:07 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,7 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 		return (0);
 	}
 	if (info->letter == 'c' && arg[0] == '\0' && size->nbs > 0)
-	{
 		size->nbs--;
-		info->len++;
-	}
 	if (!(tmp = ft_malloc_tmp(size, info, arg)))
 		return (0);
 	if (info->minus == 1)
@@ -139,7 +136,7 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 		else if (info->letter == 'i' || info->letter == 'd')
 			tmp = ft_fillin_intmin(size, tmp, arg);
 		else
-			tmp = ft_fillin_othermin(size, tmp, arg);
+			tmp = ft_fillin_othermin(info, size, tmp, arg);
 	}
 	else
 	{
@@ -148,8 +145,11 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 		else if (info->letter == 'i' || info->letter == 'd')
 			tmp = ft_fillin_int(size, tmp, arg);
 		else
-			tmp = ft_fillin_other(size, tmp, arg);
+			tmp = ft_fillin_other(info, size, tmp, arg);
 	}
+	if (info->letter == 'c' && !arg[0])
+		if (!(ft_z_co(info)))
+			return (0);
 	free(arg);
 	free(size);
 	if (!(info->res = ft_strjoin(info->res, tmp, info)))

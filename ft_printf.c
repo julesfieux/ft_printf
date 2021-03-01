@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/26 17:18:49 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/01 15:28:30 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ t_struct	*ft_init_struct(const char *data, int len)
 	if (!(info->res = malloc(sizeof(char) * 1)))
 		return (NULL);
 	info->res[0] = '\0';
+	if (!(info->z_co = malloc(sizeof(int) * 1)))
+		return (NULL);
+	info->z_co[0] = -1;
 	info->cnt = 0;
 	info->len = 0;
 	return (info);
@@ -66,6 +69,7 @@ int		ft_printf(const char *data, ...)
 	va_list 	param;
 	t_struct	*info;
 	int			len;
+	int			i;
 
 	if ((info = ft_init_struct(data, 0)) == NULL)
 		return (-1);
@@ -75,14 +79,25 @@ int		ft_printf(const char *data, ...)
 		va_end(param);
 		free(info->data);
 		free(info->res);
+		free(info->z_co);
 		free(info);
 		return (-1);
 	}
 	va_end(param);
 	len = ft_strlen(info->res);
-	write(1, info->res, len);
+	i = 0;
+	info->cnt = 0;
+	while (i < len)
+	{
+		if (ft_is_z_co(info->z_co, i) == 1)
+			write(1, &info->cnt, 1);
+		else
+			write(1, &info->res[i], 1);
+		i++;
+	}
 	free(info->data);
 	free(info->res);
+	free(info->z_co);
 	len = info->len;
 	free(info);
 	return (len);

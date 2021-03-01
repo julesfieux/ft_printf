@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/02/26 11:47:18 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/01 11:59:05 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct	s_struct
 	char		letter;
 	int			i;
 	int			len;
+	int			*z_co;
+	int			co;
 }				t_struct;
 
 typedef struct	s_size
@@ -65,11 +67,13 @@ int				ft_nb_zero(char *flag, t_struct *info, int s, va_list param);
 int				ft_init_res(t_struct *info, char *flag, va_list param);
 char			*ft_fillin_strmin(t_size *size, char *tmp, char *arg);
 char			*ft_fillin_intmin(t_size *size, char *tmp, char *arg);
-char			*ft_fillin_othermin(t_size *size, char *tmp, char *arg);
+char			*ft_fillin_othermin(t_struct *info, t_size *size, char *tmp, char *arg);
 char			*ft_fillin_str(t_size *size, char *tmp, char *arg);
-char			*ft_fillin_other(t_size *size, char *tmp, char *arg);
+char			*ft_fillin_other(t_struct *info, t_size *size, char *tmp, char *arg);
 char			*ft_fillin_int(t_size *size, char *tmp, char *arg);
 char			*ft_strjoin(char *s1, char *s2, t_struct *info);
+int				ft_z_co(t_struct *info);
+int				ft_is_z_co(int *z_co, int i);
 
 
 #endif
