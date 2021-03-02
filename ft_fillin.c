@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/01 16:11:09 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/02 12:29:10 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,15 +163,24 @@ char	*ft_fillin_int(t_size *size, char *tmp, char *arg)
 	while (i < size->biggest)
 		tmp[i++] = ' ';
 	i--;
-	while (size->nbz > 0)
+	f = size->nbz;
+	while (f > 0)
 	{
 		tmp[i--] = '0';
-		size->nbz--;
+		f--;
 	}
 	if (i < 0)
 		i = 0;
 	if (arg[0] == '-')
+	{
+		if (ft_strlen(arg) > size->nbz)
+		{
+			while (tmp[i])
+				i++;
+			i = i -ft_strlen(arg);
+		}
 		tmp[i] = '-';
+	}
 	while (tmp[i])
 		i++;
 	f = i - ft_strlen(arg);
