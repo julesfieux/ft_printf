@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/02 11:13:54 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/03 10:54:05 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,11 @@ typedef struct	s_struct
 	int			*z_co;
 	int			co;
 	int			zero;
-}				t_struct;
-
-typedef struct	s_size
-{
 	int 		pnt;
 	int			nbs;
 	int			nbz;
 	int			biggest;
-}				t_size;
+}				t_struct;
 
 
 int				ft_printf(const char *data, ...);
@@ -61,17 +57,17 @@ char			*ft_malres(long int num, char *res, int *i);
 char			*ft_init_int(long int num, char *res, int i);
 int				ft_treat_hexa(long int nb, char **arg, int maj);
 char			*ft_init_int_hexa(long int num, char *res, int maj, int i);
-char			*ft_malloc_tmp(t_size *size, t_struct *info, char *arg);
+char			*ft_malloc_tmp(t_struct *info, char *arg);
 int				ft_nb_space(char *flag, t_struct *info, int s, va_list param);
 int				ft_atoi(char *str);
 int				ft_nb_zero(char *flag, t_struct *info, int s, va_list param);
 int				ft_init_res(t_struct *info, char *flag, va_list param);
-char			*ft_fillin_strmin(t_size *size, char *tmp, char *arg);
-char			*ft_fillin_intmin(t_size *size, char *tmp, char *arg);
-char			*ft_fillin_othermin(t_struct *info, t_size *size, char *tmp, char *arg);
-char			*ft_fillin_str(t_size *size, char *tmp, char *arg);
-char			*ft_fillin_other(t_struct *info, t_size *size, char *tmp, char *arg);
-char			*ft_fillin_int(t_size *size, char *tmp, char *arg);
+char			*ft_fillin_strmin(t_struct *info, char *tmp, char *arg);
+char			*ft_fillin_intmin(t_struct *info, char *tmp, char *arg);
+char			*ft_fillin_othermin(t_struct *info, char *tmp, char *arg);
+char			*ft_fillin_str(t_struct *info, char *tmp, char *arg);
+char			*ft_fillin_other(t_struct *info, char *tmp, char *arg);
+char			*ft_fillin_int(t_struct *info, char *tmp, char *arg);
 char			*ft_strjoin(char *s1, char *s2, t_struct *info);
 int				ft_z_co(t_struct *info);
 int				ft_is_z_co(int *z_co, int i);

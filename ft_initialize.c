@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/02 12:24:44 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/03 10:54:08 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,63 +99,56 @@ char	*ft_init_arg(t_struct *info, va_list param)
 int		ft_init_res(t_struct *info, char *flag, va_list param)
 {
 	int s;
-	t_size	*size;
 	char	*tmp;
 	char	*arg;
 
 	s = 0;
 	info->i = 0;
-	if (!(size = malloc(sizeof(t_size))))
-		return (0);
-	size->pnt = 0;
-	size->nbz = 0;
+	info->pnt = 0;
+	info->nbz = 0;
 	while (flag[s] == '-' || flag[s] == '+')
 		s++;
-	if ((size->nbs = ft_nb_space(flag, info, s, param)) < 0)
+	if ((info->nbs = ft_nb_space(flag, info, s, param)) < 0)
 		return (0);
 	if (flag[info->i + s] == '.')
 	{
-		size->pnt = 1;
+		info->pnt = 1;
 		info->i++;
-		if ((size->nbz = ft_nb_zero(flag, info, s, param)) < 0)
+		if ((info->nbz = ft_nb_zero(flag, info, s, param)) < 0)
 			return (0);
 	}
 	else
 		if (info->zero == 1 && info->plus == 0 && info->minus == 0 &&
 		(info->letter == 'd' || info->letter == 'i'))
-			size->nbz = size->nbs;
+			info->nbz = info->nbs;
 	if (!(arg = ft_init_arg(info, param)))
-	{
-		free (size);
 		return (0);
-	}
-	if (info->letter == 'c' && arg[0] == '\0' && size->nbs > 0)
-		size->nbs--;
-	if (!(tmp = ft_malloc_tmp(size, info, arg)))
+	if (info->letter == 'c' && arg[0] == '\0' && info->nbs > 0)
+		info->nbs--;
+	if (!(tmp = ft_malloc_tmp(info, arg)))
 		return (0);
 	if (info->minus == 1)
 	{
 		if (info->letter == 's')
-			tmp = ft_fillin_strmin(size, tmp, arg);
+			tmp = ft_fillin_strmin(info, tmp, arg);
 		else if (info->letter == 'i' || info->letter == 'd')
-			tmp = ft_fillin_intmin(size, tmp, arg);
+			tmp = ft_fillin_intmin(info, tmp, arg);
 		else
-			tmp = ft_fillin_othermin(info, size, tmp, arg);
+			tmp = ft_fillin_othermin(info, tmp, arg);
 	}
 	else
 	{
 		if (info->letter == 's')
-			tmp = ft_fillin_str(size, tmp, arg);
+			tmp = ft_fillin_str(info, tmp, arg);
 		else if (info->letter == 'i' || info->letter == 'd')
-			tmp = ft_fillin_int(size, tmp, arg);
+			tmp = ft_fillin_int(info, tmp, arg);
 		else
-			tmp = ft_fillin_other(info, size, tmp, arg);
+			tmp = ft_fillin_other(info, tmp, arg);
 	}
 	if (info->letter == 'c' && !arg[0])
 		if (!(ft_z_co(info)))
 			return (0);
 	free(arg);
-	free(size);
 	if (!(info->res = ft_strjoin(info->res, tmp, info)))
 		return (0);
 	return (1);

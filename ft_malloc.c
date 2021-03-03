@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:52:21 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/02 11:50:09 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/03 10:57:29 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,43 +33,45 @@ char	*ft_malres(long int num, char *res, int *i)
 	return (res);
 }
 
-char	*ft_malloc_tmp(t_size *size, t_struct *info, char *arg)
+char	*ft_malloc_tmp(t_struct *info, char *arg)
 {
 	char *tmp;
+	int		len_arg;
 
-	size->biggest = size->nbs;
+	len_arg = ft_strlen(arg);
+	info->biggest = info->nbs;
 	if (info->letter == 's')
 	{
-		if (size->pnt == 1)
+		if (info->pnt == 1)
 		{
-			if (size->nbz < ft_strlen(arg) && size->nbz > size->nbs)
-				size->biggest = size->nbz;
-			else if (ft_strlen(arg) > size->nbs && size->nbz > size->nbs)
-				size->biggest = ft_strlen(arg);
+			if (info->nbz < len_arg && info->nbz > info->nbs)
+				info->biggest = info->nbz;
+			else if (len_arg > info->nbs && info->nbz > info->nbs)
+				info->biggest = len_arg;
 		}
 		else
-			if (ft_strlen(arg) > size->nbs)
-				size->biggest = ft_strlen(arg);
+			if (len_arg > info->nbs)
+				info->biggest = len_arg;
 	}
 	else
 	{
-		if (size->nbz > size->biggest)
-			size->biggest = size->nbz;
-		if (ft_strlen(arg) > size->biggest)
-			size->biggest = ft_strlen(arg);
+		if (info->nbz > info->biggest)
+			info->biggest = info->nbz;
+		if (len_arg > info->biggest)
+			info->biggest = len_arg;
 		if (info->letter == 'i' || info->letter == 'd')
 		{
-			if (arg[0] == '-' && size->nbs < size->nbz)
-			size->biggest++;
+			if (arg[0] == '-' && info->nbs < info->nbz)
+			info->biggest++;
 		}
 		if (info->letter == 'c' && !arg[0])
-			size->biggest++;
-		if (ft_strlen(arg) > size->nbs && ft_strlen(arg) > size->nbz && 
+			info->biggest++;
+		if (len_arg > info->nbs && len_arg > info->nbz && 
 		(info->letter == 'd' || info->letter == 'i') && arg[0] == '0' &&
-		size->pnt == 1)
-			size->biggest--;
+		info->pnt == 1)
+			info->biggest--;
 	}
-	if (!(tmp = malloc(sizeof(char) * (size->biggest + 1))))
+	if (!(tmp = malloc(sizeof(char) * (info->biggest + 1))))
 		return (NULL);
 	return (tmp);
 }
