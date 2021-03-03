@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/03 10:54:08 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/03 11:26:06 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 
 	s = 0;
 	info->i = 0;
-	info->pnt = 0;
 	info->nbz = 0;
 	while (flag[s] == '-' || flag[s] == '+')
 		s++;
@@ -112,7 +111,6 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 		return (0);
 	if (flag[info->i + s] == '.')
 	{
-		info->pnt = 1;
 		info->i++;
 		if ((info->nbz = ft_nb_zero(flag, info, s, param)) < 0)
 			return (0);

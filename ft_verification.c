@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:46:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/02 11:37:08 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/03 11:41:45 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int		ft_verif_id(char **flag_ref, int len_flag, t_struct *info, int i)
 	}
 	else
 	{
-		while (info->data[info->cnt - i] >= '0' && info->data[info->cnt - i] <= '9')
+		while (info->data[info->cnt - i] >= '0' &&
+		info->data[info->cnt - i] <= '9' && len_flag >= 0)
 		{
 			flag[len_flag--] = info->data[info->cnt - i];
 			i++;

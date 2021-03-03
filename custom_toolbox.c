@@ -6,43 +6,11 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/03 11:04:22 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/03 11:53:41 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*int		str_len_flag(t_struct *info)
-{
-	int len_flag;
-
-	len_flag = 0;
-	info->plus = 0;
-	info->minus = 0;
-	info->cnt++;
-	while (info->data[info->cnt] == '0' || info->data[info->cnt] == '-' || info->data[info->cnt] == '+')
-	{
-		if (info->data[info->cnt] == '-')
-			info->minus = 1;
-		if (info->data[info->cnt] == '+')
-			info->plus = 1;
-		if (info->data[info->cnt] != '0')
-		{
-			info->zero = 1;
-			len_flag++;
-		}
-		info->cnt++;
-	}
-	while (ft_isletter(info->data[info->cnt]) != 1 && info->data[info->cnt])
-	{
-		info->cnt++;
-		len_flag++;
-	}
-	if (!info->data[info->cnt])
-		return (-1);
-	info->letter = info->data[info->cnt];
-	return (len_flag);
-}*/
 
 int		str_len_flag(t_struct *info)
 {
@@ -52,6 +20,7 @@ int		str_len_flag(t_struct *info)
 	len_flag = info->cnt;
 	info->plus = 0;
 	info->minus = 0;
+	info->pnt = 0;
 	while (ft_isletter(info->data[info->cnt]) != 1 && info->data[info->cnt])
 	{
 		if (info->data[info->cnt] == '.')
@@ -69,10 +38,11 @@ int		str_len_flag(t_struct *info)
 			info->minus = 1;
 		if (info->data[info->cnt] == '+')
 			info->plus = 1;
-		if (info->data[info->cnt] == '0' && info->pnt == 0)
-			info->zero = 1;
-		else
+		if (info->data[info->cnt] != '0' || info->data[info->cnt + 1] == '.')
 			len_flag++;
+		else
+			if (info->pnt == 0)
+				info->zero = 1;
 		info->cnt++;
 	}
 	while (ft_isletter(info->data[info->cnt]) != 1 && info->data[info->cnt])
