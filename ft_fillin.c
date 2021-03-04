@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/03 13:57:04 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/04 11:32:20 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ char	*ft_fillin_othermin(t_struct *info, char *tmp, char *arg)
 		info->co = f;
 		tmp[f++] = ' ';
 	}
-	else if (info->letter == 'u' && info->pnt == 1 && arg[0] == '0' &&
-	info->nbs == 0 && info->nbz == 0)
-		tmp[f] = 0;
+	else if (info->letter == 'u' && info->nbz == 0 && info->pnt == 1 &&
+	arg[0] == '0')
+	{
+		if (info->nbs == 0)
+			tmp[f] = 0;
+		return (tmp);
+	}
 	else
 		while (arg[i])
 			tmp[f++] = arg[i++];
@@ -112,9 +116,13 @@ char	*ft_fillin_other(t_struct *info, char *tmp, char *arg)
 	i = 0;
 	if (info->letter == 'c' && !arg[0])
 		info->co = f - 1;
-	else if (info->letter == 'u' && info->pnt == 1 && arg[0] == '0' &&
-	info->nbs == 0 && info->nbz == 0)
-		tmp[f] = 0;
+	else if (info->letter == 'u' && info->nbz == 0 && info->pnt == 1 &&
+	arg[0] == '0')
+	{
+		if (info->nbs == 0)
+			tmp[f] = 0;
+		return (tmp);
+	}
 	else
 		while (arg[i])
 			tmp[f++] = arg[i++];
