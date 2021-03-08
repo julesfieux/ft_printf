@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/08 10:39:06 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/08 10:57:39 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 	}
 	else
 		if (info->zero == 1 && info->plus == 0 && info->minus == 0 &&
-		(info->letter == 'd' || info->letter == 'i' ||info->letter == 'u' ))
+		(info->letter == 'd' || info->letter == 'i' || info->letter == 'u' ||
+		info->letter == 'x' || info->letter == 'X'))
 			info->nbz = info->nbs;
 	if (!(arg = ft_init_arg(info, param)))
 		return (0);
