@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 10:39:00 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/08 12:02:48 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/08 18:49:51 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_treat_pointer(unsigned long long adress, char **arg)
 	int					len;
 	unsigned long long	temp;
 	const char			base[16] = "0123456789abcdef";
-	char				null[5] = "(nil)";
+	char				null[3] = "0x0";
 	char				*tmp;
 
 	temp = adress;
@@ -71,7 +71,7 @@ int		ft_treat_pointer(unsigned long long adress, char **arg)
 		if (!(tmp = malloc(sizeof(char) * 6)))
 			return (0);
 		len = 0;
-		while (len < 5)
+		while (len < 3)
 		{
 			tmp[len] = null[len];
 			len++;
