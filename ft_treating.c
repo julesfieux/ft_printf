@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 10:39:00 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/08 10:38:34 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/08 12:02:48 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,30 @@ int		ft_treat_char(char c, char **arg)
 
 int		ft_treat_str(char *str, char **arg)
 {
-	int		i;
-	char	*tmp;
+	int			i;
+	char		*tmp;
+	const char	null[6] = "(null)";
 
 	i = 0;
-	if (!(tmp = malloc(sizeof(char) * (ft_strlen(str) + 1))))
-		return (0);
-	while (str[i])
+	if (str == NULL)
 	{
-		tmp[i] = str[i];
-		i++;
+		if (!(tmp = malloc(sizeof(char) * 7)))
+			return (0);
+		while (null[i])
+		{
+			tmp[i] = null[i];
+			i++;
+		}
+	}
+	else
+	{
+		if (!(tmp = malloc(sizeof(char) * (ft_strlen(str) + 1))))
+			return (0);
+		while (str[i])
+		{
+			tmp[i] = str[i];
+			i++;
+		}
 	}
 	tmp[i] = '\0';
 	*arg = tmp;
@@ -47,26 +61,42 @@ int		ft_treat_pointer(unsigned long long adress, char **arg)
 	int					len;
 	unsigned long long	temp;
 	const char			base[16] = "0123456789abcdef";
+	char				null[5] = "(nil)";
 	char				*tmp;
 
 	temp = adress;
 	len = 2;
-	while (temp > 0)
+	if (adress == 0)
 	{
-		temp = temp / 16;
-		len++;
+		if (!(tmp = malloc(sizeof(char) * 6)))
+			return (0);
+		len = 0;
+		while (len < 5)
+		{
+			tmp[len] = null[len];
+			len++;
+		}
+		tmp[len] = '\0';
 	}
-	if (!(tmp = malloc(sizeof(char) * (len + 1))))
-		return (0);
-	tmp[0] = '0';
-	tmp[1] = 'x';
-	tmp[len--] = '\0';
-	while (len > 2)
+	if (adress != 0)
 	{
-		tmp[len--] = base[adress % 16];
-		adress = adress / 16;
+		while (temp > 0)
+		{
+			temp = temp / 16;
+			len++;
+		}
+		if (!(tmp = malloc(sizeof(char) * (len + 1))))
+			return (0);
+		tmp[0] = '0';
+		tmp[1] = 'x';
+		tmp[len--] = '\0';
+		while (len > 2)
+		{
+			tmp[len--] = base[adress % 16];
+			adress = adress / 16;
+		}
+		tmp[len] = base[adress];
 	}
-	tmp[len] = base[adress];
 	*arg = tmp;
 	return (1);
 }
