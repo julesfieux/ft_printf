@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 10:39:00 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/02 12:02:05 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/08 10:38:34 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int		ft_treat_hexa(long int nb, char **arg, int maj)
 	if (nb == 0)
 	{
 		tmp[0] = '0';
+		*arg = tmp;
 		return (1);
 	}
 	tmp = ft_init_int_hexa(nb, tmp, maj, i);
