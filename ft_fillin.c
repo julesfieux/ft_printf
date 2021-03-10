@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 11:16:57 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/10 13:37:22 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,23 +140,20 @@ char	*ft_fillin_intmin(t_struct *info, char *tmp, char *arg)
 	while (i < info->biggest)
 		tmp[i++] = ' ';
 	i = 0;
-	if (info->plus == 1 && arg[0] != '-')
-	{
-		tmp[i++] = '+';
-		info->nbz++;
-		while (i < info->nbz)
-			tmp[i++] = '0';
-	}
 	if (arg[0] == '-')
 	{
 		tmp[i++] = '-';
 		info->nbz++;
-		while (i < info->nbz)
-			tmp[i++] = '0';
 	}
-	else
-		while (i < info->nbz)
-			tmp[i++] = '0';
+	else if (info->plus == 1)
+	{
+		tmp[i++] = '+';
+		info->nbz++;
+	}
+	else if (info->space == 1)
+		i++;
+	while (i < info->nbz)
+		tmp[i++] = '0';
 	if (info->nbz > ft_strlen(arg))
 		f = i - ft_strlen(arg);
 	i = 0;
@@ -165,9 +162,13 @@ char	*ft_fillin_intmin(t_struct *info, char *tmp, char *arg)
 		f++;
 		i++;
 	}
-	if (info->plus == 1 && arg[0] != '-')
+	else if (info->plus == 1)
 		f++;
-	if (arg[0] == '0' && info->pnt == 1)
+	else if (info->space == 1)
+		f++;
+	if (info->space == 1 && info->nbz == 0 && arg[0] == '0' && info->pnt == 1)
+		return (tmp);
+	if (arg[0] == '0' && info->pnt == 1 && info->space == 0)
 		return (tmp);
 	while (arg[i])
 		tmp[f++] = arg[i++];
@@ -192,7 +193,17 @@ char	*ft_fillin_int(t_struct *info, char *tmp, char *arg)
 	}
 	if (i < 0)
 		i = 0;
-	if (info->plus == 1 && arg[0] != '-')
+	if (arg[0] == '-')
+	{
+		if (ft_strlen(arg) > info->nbz)
+		{
+			while (tmp[i])
+				i++;
+			i = i - ft_strlen(arg);
+		}
+		tmp[i] = '-';
+	}
+	else if (info->plus == 1)
 	{
 		if (ft_strlen(arg) > info->nbz)
 		{
@@ -204,15 +215,17 @@ char	*ft_fillin_int(t_struct *info, char *tmp, char *arg)
 			i++;
 		tmp[i] = '+';
 	}
-	if (arg[0] == '-')
+	else if (info->space == 1)
 	{
 		if (ft_strlen(arg) > info->nbz)
 		{
 			while (tmp[i])
 				i++;
-			i = i - ft_strlen(arg);
+			i = i - (ft_strlen(arg) + 1);
 		}
-		tmp[i] = '-';
+		if (arg[0] == '0' && info->pnt == 1 && info->nbs == 0 && info->nbz == 0)
+			i++;
+		tmp[i] = ' ';
 	}
 	while (tmp[i])
 		i++;
@@ -223,7 +236,9 @@ char	*ft_fillin_int(t_struct *info, char *tmp, char *arg)
 		f++;
 		i++;
 	}
-	if (arg[0] == '0' && info->pnt == 1)
+	if (info->space == 1 && info->nbz == 0 && arg[0] == '0' && info->pnt == 1)
+		return (tmp);
+	if (arg[0] == '0' && info->pnt == 1 && info->space == 0)
 		return (tmp);
 	while (arg[i])
 		tmp[f++] = arg[i++];

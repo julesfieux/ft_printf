@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 11:16:40 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/10 13:37:11 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 	s = 0;
 	info->i = 0;
 	info->nbz = 0;
-	while (flag[s] == '-' || flag[s] == '+')
+	while (flag[s] == '-' || flag[s] == '+' || flag[s] == ' ')
 		s++;
 	if ((info->nbs = ft_nb_space(flag, info, s, param)) < 0)
 		return (0);

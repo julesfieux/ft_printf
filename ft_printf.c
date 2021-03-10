@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 10:27:52 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/10 12:21:22 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_struct	*ft_init_struct(const char *data, int len)
 	info->cnt = 0;
 	info->plus = 0;
 	info->minus = 0;
+	info->space = 0;
 	info->letter = 0;
 	info->i = 0;
 	info->len = 0;

@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 10:29:24 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/10 13:36:38 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,15 @@ int		str_len_flag(t_struct *info)
 	info->letter = info->data[info->cnt];
 	info->cnt = len_flag;
 	len_flag = 0;
-	while (info->data[info->cnt] == '0' || info->data[info->cnt] == '-' || info->data[info->cnt] == '+')
+	while (info->data[info->cnt] == '0' || info->data[info->cnt] == '-' ||
+	info->data[info->cnt] == '+' || info->data[info->cnt] == ' ')
 	{
 		if (info->data[info->cnt] == '-')
 			info->minus = 1;
 		if (info->data[info->cnt] == '+')
 			info->plus = 1;
+		if (info->data[info->cnt] == ' ')
+			info->space = 1;
 		if (info->data[info->cnt] != '0' || info->data[info->cnt + 1] == '.')
 			len_flag++;
 		else
