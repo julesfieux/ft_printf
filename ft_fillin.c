@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/08 11:15:02 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/10 11:16:57 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,13 @@ char	*ft_fillin_intmin(t_struct *info, char *tmp, char *arg)
 	while (i < info->biggest)
 		tmp[i++] = ' ';
 	i = 0;
+	if (info->plus == 1 && arg[0] != '-')
+	{
+		tmp[i++] = '+';
+		info->nbz++;
+		while (i < info->nbz)
+			tmp[i++] = '0';
+	}
 	if (arg[0] == '-')
 	{
 		tmp[i++] = '-';
@@ -153,11 +160,13 @@ char	*ft_fillin_intmin(t_struct *info, char *tmp, char *arg)
 	if (info->nbz > ft_strlen(arg))
 		f = i - ft_strlen(arg);
 	i = 0;
-	if (arg[i] == '-')
+	if (arg[0] == '-')
 	{
 		f++;
 		i++;
 	}
+	if (info->plus == 1 && arg[0] != '-')
+		f++;
 	if (arg[0] == '0' && info->pnt == 1)
 		return (tmp);
 	while (arg[i])
@@ -183,13 +192,25 @@ char	*ft_fillin_int(t_struct *info, char *tmp, char *arg)
 	}
 	if (i < 0)
 		i = 0;
+	if (info->plus == 1 && arg[0] != '-')
+	{
+		if (ft_strlen(arg) > info->nbz)
+		{
+			while (tmp[i])
+				i++;
+			i = i - (ft_strlen(arg) + 1);
+		}
+		if (arg[0] == '0' && info->pnt == 1 && info->nbs == 0 && info->nbz == 0)
+			i++;
+		tmp[i] = '+';
+	}
 	if (arg[0] == '-')
 	{
 		if (ft_strlen(arg) > info->nbz)
 		{
 			while (tmp[i])
 				i++;
-			i = i -ft_strlen(arg);
+			i = i - ft_strlen(arg);
 		}
 		tmp[i] = '-';
 	}
