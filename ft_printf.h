@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 11:31:02 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/10 16:45:22 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_struct
 	int			plus;
 	int			minus;
 	int			space;
+	int			sharp;
 	char		letter;
 	int			i;
 	int			len;

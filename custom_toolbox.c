@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 13:36:38 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/11 10:14:30 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int		str_len_flag(t_struct *info)
 	info->letter = info->data[info->cnt];
 	info->cnt = len_flag;
 	len_flag = 0;
+	if (info->data[info->cnt] == '#')
+	{
+		info->sharp = 1;
+		info->cnt++;
+	}
 	while (info->data[info->cnt] == '0' || info->data[info->cnt] == '-' ||
 	info->data[info->cnt] == '+' || info->data[info->cnt] == ' ')
 	{
@@ -134,33 +139,35 @@ int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
 {
 	char	*temp;
 	int		f;
+	int		i;
 
 	f = 0;
-	if (flag[info->i + s] == '*')
-		info->i = va_arg(param, int);
+	i = info->i;
+	if (flag[i + s] == '*')
+		i = va_arg(param, int);
 	else
 	{
-		while (flag[info->i + s] >= '0' && flag[s + info->i++] <= '9')
+		while (flag[i + s] >= '0' && flag[s + i++] <= '9')
 			f++;
 		if (!f)
 			return (0);
 		if (!(temp = malloc(sizeof(char) * (f + 1))))
 			return (-1);
-		info->i = info->i - f;
+		i = i - f;
 		f = 0;
-		while (flag[info->i + s] >= '0' && flag[info->i + s] <= '9')
-			temp[f++] = flag[s + info->i++];
+		while (flag[i + s] >= '0' && flag[i + s] <= '9')
+			temp[f++] = flag[s + i++];
 		temp[f] = '\0';
-		info->i = ft_atoi(temp);
+		i = ft_atoi(temp);
 		free(temp);
 	}
-	if (info->i < 0)
+	if (i < 0)
 	{
 		if (info->letter == 's')
 			info->pnt = 0;
-		info->i = -info->i;
+		i = -i;
 	}
-	return (info->i);
+	return (i);
 }
 
 int		ft_z_co(t_struct *info)

@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:52:21 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 13:54:06 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/10 17:37:19 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,16 @@ char	*ft_malloc_tmp(t_struct *info, char *arg)
 				else if (info->nbz > 0)
 					info->biggest++;
 			}
+		}
+		if ((info->letter == 'x' || info->letter == 'X') && info->sharp == 1 &&
+		arg[0] != '0')
+		{
+			if (info->nbs <= info->nbz && info->nbs <= len_arg)
+				info->biggest = info->biggest + 2;
+			else if (info->nbs <= info->nbz + 2 && info->nbz >= len_arg)
+				info->biggest = info->biggest + ((info->nbz + 2) - info->nbs);
+			else if (info->nbs <= len_arg + 2 && len_arg >= info->nbz)
+				info->biggest = info->biggest + ((len_arg + 2) - info->nbs);
 		}
 		if (info->letter == 'c' && !arg[0])
 			info->biggest++;

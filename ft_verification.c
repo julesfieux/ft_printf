@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:46:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 12:32:40 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/10 16:30:53 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ int		ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i)
 	}
 	else
 	{
-		while (info->data[info->cnt - i] >= '0' && info->data[info->cnt - i] <= '9')
+		while (len_flag >= 0 && info->data[info->cnt - i] >= '0' &&
+		info->data[info->cnt - i] <= '9')
 		{
 			flag[len_flag--] = info->data[info->cnt - i];
 			i++;
@@ -146,9 +147,11 @@ int		ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i)
 		}
 	}
 	while (len_flag >= 0 && (info->data[info->cnt - i] == '-'
-	|| info->data[info->cnt - i] == '0'))
+	|| info->data[info->cnt - i] == '0' || info->data[info->cnt - i] == '#'))
 	{
-		if (info->data[info->cnt - i] == '0')
+		if (info->data[info->cnt - i] == '#')
+			i++;
+		else if (info->data[info->cnt - i] == '0')
 			i++;
 		else
 		{

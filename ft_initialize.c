@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 13:37:11 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/11 10:50:20 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,23 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 		info->i++;
 		if ((info->nbz = ft_nb_zero(flag, info, s, param)) < 0)
 			return (0);
+		info->i--;
 	}
-	else
+	if (!(arg = ft_init_arg(info, param)))
+		return (0);
+	if (flag[info->i + s] != '.')
+	{
 		if (info->zero == 1 && info->minus == 0 &&
 		(info->letter == 'd' || info->letter == 'i' || info->letter == 'u' ||
 		info->letter == 'x' || info->letter == 'X'))
-			info->nbz = info->nbs;
-	if (!(arg = ft_init_arg(info, param)))
-		return (0);
+		{
+			if (info->sharp == 0)
+				info->nbz = info->nbs;
+			else
+				if (arg[0] == '0')
+					info->nbz = info->nbs;
+		}
+	}
 	if (info->letter == 'c' && arg[0] == '\0' && info->nbs > 0)
 		info->nbs--;
 	if (!(tmp = ft_malloc_tmp(info, arg)))
