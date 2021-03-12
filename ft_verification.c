@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:46:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 16:30:53 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:45:33 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int		ft_verif_cp(char **flag_ref, int len_flag, t_struct *info)
 
 	flag = *flag_ref;
 	i = 1;
+	if (info->letter == 'c' && info->l > 2)
+		return (-1);
+	if (info->letter == 'p' && info->l > 0)
+		return (-1);
 	if (info->data[info->cnt - i] == '.')
 	{
 		flag[len_flag] = info->data[info->cnt - i];
@@ -57,6 +61,10 @@ int		ft_verif_id(char **flag_ref, int len_flag, t_struct *info, int i)
 	char	*flag;
 
 	flag = *flag_ref;
+	if ((info->letter == 'i' || info->letter == 'd') && info->l > 2)
+		return (-1);
+	if (info->letter == '%' && info->l > 0)
+		return (-1);
 	if (info->data[info->cnt - i] == '*')
 	{
 		flag[len_flag--] = info->data[info->cnt - i];
@@ -92,7 +100,7 @@ int		ft_verif_id(char **flag_ref, int len_flag, t_struct *info, int i)
 	}
 	while (len_flag >= 0 && (info->data[info->cnt - i] == '-' ||
 	info->data[info->cnt - i] == ' ' || info->data[info->cnt - i] == '+' ||
-	info->data[info->cnt - i] == '0'))
+	info->data[info->cnt - i] == '0' || info->data[info->cnt - i] == 'l'))
 	{
 		if (info->data[info->cnt - i] == '0')
 			i++;
@@ -113,6 +121,9 @@ int		ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i)
 	char	*flag;
 
 	flag = *flag_ref;
+	if ((info->letter == 'u' || info->letter == 'x' || info->letter == 'X' ||
+	info->letter == 's') && info->l > 2)
+		return (-1);
 	if (info->data[info->cnt - i] == '*')
 	{
 		flag[len_flag--] = info->data[info->cnt - i];
@@ -147,7 +158,8 @@ int		ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i)
 		}
 	}
 	while (len_flag >= 0 && (info->data[info->cnt - i] == '-'
-	|| info->data[info->cnt - i] == '0' || info->data[info->cnt - i] == '#'))
+	|| info->data[info->cnt - i] == '0' || info->data[info->cnt - i] == '#' ||
+	info->data[info->cnt - i] == 'l'))
 	{
 		if (info->data[info->cnt - i] == '#')
 			i++;

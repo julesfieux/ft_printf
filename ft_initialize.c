@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/11 10:50:20 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:40:29 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,54 @@ char	*ft_init_arg(t_struct *info, va_list param)
 
 	i = 0;
 	if (info->letter == 'c')
-		i = ft_treat_char(va_arg(param, int), &arg);
+	{
+		if (info->l == 1)
+			i = ft_treat_char(va_arg(param, long int), &arg);
+		else if (info->l == 2)
+			i = ft_treat_char(va_arg(param, long long int), &arg);
+		else
+			i = ft_treat_char(va_arg(param, int), &arg);
+	}
 	if (info->letter == 's')
 		i = ft_treat_str(va_arg(param, char *), &arg);
 	if (info->letter == 'p')
 		i = ft_treat_pointer(va_arg(param, unsigned long long), &arg);
 	if (info->letter == 'd' || info->letter == 'i')
-		i = ft_treat_int(va_arg(param, int), &arg);
+	{
+		if (info->l == 1)
+			i = ft_treat_int(va_arg(param, long int), &arg);
+		else if (info->l == 2)
+			i = ft_treat_int(va_arg(param, long long int), &arg);
+		else
+			i = ft_treat_int(va_arg(param, int), &arg);
+	}
 	if (info->letter == 'u')
-		i = ft_treat_int(va_arg(param, unsigned int), &arg);
+	{
+		if (info->l == 1)
+			i = ft_treat_uint(va_arg(param, unsigned long int), &arg);
+		else if (info->l == 2)
+			i = ft_treat_uint(va_arg(param, unsigned long long int), &arg);
+		else
+			i = ft_treat_uint(va_arg(param, unsigned int), &arg);
+	}
 	if (info->letter == 'x')
-		i = ft_treat_hexa(va_arg(param, unsigned int), &arg, 0);
+	{
+		if (info->l == 1)
+			i = ft_treat_hexa(va_arg(param, unsigned long int), &arg, 0);
+		else if (info->l == 2)
+			i = ft_treat_hexa(va_arg(param, unsigned long long int), &arg, 0);
+		else
+			i = ft_treat_hexa(va_arg(param, unsigned int), &arg, 0);
+	}
 	if (info->letter == 'X')
-		i = ft_treat_hexa(va_arg(param, unsigned int), &arg, 1);
+	{
+		if (info->l == 1)
+			i = ft_treat_hexa(va_arg(param, unsigned long int), &arg, 1);
+		else if (info->l == 2)
+			i = ft_treat_hexa(va_arg(param, unsigned long long int), &arg, 1);
+		else
+			i = ft_treat_hexa(va_arg(param, unsigned int), &arg, 1);
+	}
 	if (info->letter == '%')
 		i = ft_treat_char('%', &arg);
 	if (!i)

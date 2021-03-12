@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 10:39:00 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/08 18:50:50 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:39:12 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int		ft_treat_pointer(unsigned long long adress, char **arg)
 	return (1);
 }
 
-int		ft_treat_int(long int nb, char **arg)
+int		ft_treat_int(long long int nb, char **arg)
 {
 	int			i;
 
@@ -115,6 +115,23 @@ int		ft_treat_int(long int nb, char **arg)
 		return (1);
 	}
 	*arg = ft_init_int(nb, *arg, i);
+	return (1);
+}
+
+int		ft_treat_uint(unsigned long long int nb, char **arg)
+{
+	int			i;
+
+	i = 0;
+	*arg = NULL;
+	if (!(*arg = ft_umalres(nb, *arg, &i)))
+		return (0);
+	if (nb == 0)
+	{
+		*arg[0] = '0';
+		return (1);
+	}
+	*arg = ft_init_uint(nb, *arg, i);
 	return (1);
 }
 

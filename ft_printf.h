@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/10 16:45:22 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:37:38 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_struct
 	int			minus;
 	int			space;
 	int			sharp;
+	int			l;
 	char		letter;
 	int			i;
 	int			len;
@@ -54,9 +55,12 @@ char			*ft_init_arg(t_struct *info, va_list param);
 int				ft_treat_char(char c, char **arg);
 int				ft_treat_str(char *str, char **arg);
 int				ft_treat_pointer(unsigned long long adress, char **arg);
-int				ft_treat_int(long int nb, char **arg);
-char			*ft_malres(long int num, char *res, int *i);
-char			*ft_init_int(long int num, char *res, int i);
+int				ft_treat_int(long long int nb, char **arg);
+int				ft_treat_uint(unsigned long long int nb, char **arg);
+char			*ft_malres(long long int num, char *res, int *i);
+char			*ft_umalres(unsigned long long int num, char *res, int *i);
+char			*ft_init_int(long long int num, char *res, int i);
+char			*ft_init_uint(unsigned long long int num, char *res, int i);
 int				ft_treat_hexa(long int nb, char **arg, int maj);
 char			*ft_init_int_hexa(long int num, char *res, int maj, int i);
 char			*ft_malloc_tmp(t_struct *info, char *arg);

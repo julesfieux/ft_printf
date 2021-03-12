@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/11 10:14:30 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:38:53 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int		str_len_flag(t_struct *info)
 		info->cnt++;
 	}
 	while (info->data[info->cnt] == '0' || info->data[info->cnt] == '-' ||
-	info->data[info->cnt] == '+' || info->data[info->cnt] == ' ')
+	info->data[info->cnt] == '+' || info->data[info->cnt] == ' ' || 
+	info->data[info->cnt] == 'l')
 	{
 		if (info->data[info->cnt] == '-')
 			info->minus = 1;
@@ -46,6 +47,8 @@ int		str_len_flag(t_struct *info)
 			info->plus = 1;
 		if (info->data[info->cnt] == ' ')
 			info->space = 1;
+		if (info->data[info->cnt] == 'l')
+			(info->l)++;
 		if (info->data[info->cnt] != '0' || info->data[info->cnt + 1] == '.')
 			len_flag++;
 		else
@@ -61,13 +64,40 @@ int		str_len_flag(t_struct *info)
 	return (len_flag);
 }
 
-char	*ft_init_int(long int num, char *res, int i)
+char	*ft_init_int(long long int num, char *res, int i)
 {
-	if (num < 0)
+	long long lim;
+	const char *limit = "-9223372036854775808";
+
+	lim = -9223372036854775807;
+	if (num == (lim - 1))
 	{
-		num = -num;
-		res[0] = '-';
+		i = 0;
+		while (limit[i])
+		{
+			res[i] = limit[i];
+			i++;
+		}
 	}
+	else
+	{
+		if (num < 0)
+		{
+			num = -num;
+			res[0] = '-';
+		}
+		while (num > 0)
+		{
+			res[i] = ((num % 10) + '0');
+			i--;
+			num = num / 10;
+		}
+	}
+	return (res);
+}
+
+char	*ft_init_uint(unsigned long long int num, char *res, int i)
+{
 	while (num > 0)
 	{
 		res[i] = ((num % 10) + '0');
