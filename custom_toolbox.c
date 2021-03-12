@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/12 11:38:53 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:54:22 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*ft_init_uint(unsigned long long int num, char *res, int i)
 	return (res);
 }
 
-char	*ft_init_int_hexa(long int num, char *res, int maj, int i)
+char	*ft_init_int_hexa(unsigned long long int num, char *res, int maj, int i)
 {
 	const char basemin[] = "0123456789abcdef";
 	const char basemaj[] = "0123456789ABCDEF";

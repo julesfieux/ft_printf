@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 10:39:00 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/12 11:39:12 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/12 11:55:29 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,10 @@ int		ft_treat_uint(unsigned long long int nb, char **arg)
 	return (1);
 }
 
-int		ft_treat_hexa(long int nb, char **arg, int maj)
+int		ft_treat_hexa(unsigned long long int nb, char **arg, int maj)
 {
 	int			i;
-	long int	num;
+	unsigned long long int	num;
 	char		*tmp;
 
 	i = 0;
