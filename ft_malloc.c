@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:52:21 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/15 12:23:39 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/15 16:06:31 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ char	*ft_malloc_tmp(t_struct *info, char *arg)
 			if (len_arg > info->nbs)
 				info->biggest = len_arg;
 	}
-	else if (info->letter == '%')
-		info->biggest = 1;
 	else
 	{
 		if (info->nbz > info->biggest)
