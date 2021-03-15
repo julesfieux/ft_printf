@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/15 12:13:51 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/15 15:38:04 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,10 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 		else if (info->letter == 'i' || info->letter == 'd')
 			tmp = ft_fillin_intmin(info, tmp, arg);
 		else if (info->letter == '%')
+		{
 			tmp[0] = '%';
+			tmp[1] = '\0';
+		}
 		else
 			tmp = ft_fillin_othermin(info, tmp, arg);
 	}
@@ -188,7 +191,10 @@ int		ft_init_res(t_struct *info, char *flag, va_list param)
 		else if (info->letter == 'i' || info->letter == 'd')
 			tmp = ft_fillin_int(info, tmp, arg);
 		else if (info->letter == '%')
+		{
 			tmp[0] = '%';
+			tmp[1] = '\0';
+		}
 		else
 			tmp = ft_fillin_other(info, tmp, arg);
 	}
