@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/11 11:13:19 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/16 11:10:45 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ char	*ft_fillin_other(t_struct *info, char *tmp, char *arg)
 {
 	int		i;
 	int		f;
+	int		tmp_nbz;
 
 	i = 0;
+	tmp_nbz = info->nbz;
 	tmp[info->biggest] = '\0';
 	if ((info->letter == 'x' || info->letter == 'X') && info->sharp == 1 &&
 	arg[0] != '0')
@@ -143,7 +145,7 @@ char	*ft_fillin_other(t_struct *info, char *tmp, char *arg)
 	if (info->letter == 'c' && !arg[0])
 		info->co = f - 1;
 	else if ((info->letter == 'u' || info->letter == 'x' || info->letter == 'X')
-	&& info->nbz == 0 && info->pnt == 1 && arg[0] == '0')
+	&& tmp_nbz == 0 && info->pnt == 1 && arg[0] == '0')
 	{
 		if (info->nbs == 0)
 			tmp[f] = 0;
