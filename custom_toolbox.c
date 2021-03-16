@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/12 11:54:22 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/16 15:20:44 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,11 @@ int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
 	f = 0;
 	i = info->i;
 	if (flag[i + s] == '*')
+	{
 		i = va_arg(param, int);
+		if (i < 0)
+			i = 0;
+	}
 	else
 	{
 		while (flag[i + s] >= '0' && flag[s + i++] <= '9')
