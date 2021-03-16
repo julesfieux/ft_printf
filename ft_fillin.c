@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/16 11:26:26 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/16 11:44:14 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,11 +152,18 @@ char	*ft_fillin_other(t_struct *info, char *tmp, char *arg)
 		return (tmp);
 	}
 	else
-		while (arg[i])
-			tmp[f++] = arg[i++];
-	if (info->letter == 'p' && tmp_nbz == 0 && info->pnt == 1 && arg[0] == '0'
-	&& info->nbs == 0)
-		tmp[2] = 0;
+	{
+		if (info->letter == 'p' && tmp_nbz == 0 && info->pnt == 1 &&
+		arg[0] == '0')
+		{
+			f++;
+			while (f < info->biggest)
+				tmp[f++] = arg[i++];
+		}
+		else
+			while (arg[i])
+				tmp[f++] = arg[i++];
+	}
 	return (tmp);
 }
 
