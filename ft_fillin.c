@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/16 14:54:08 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/16 15:53:04 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,12 @@ char	*ft_fillin_str(t_struct *info, char *tmp, char *arg)
 
 	i = 0;
 	tmp[info->biggest] = '\0';
-	while (i < info->biggest)
-		tmp[i++] = ' ';
+	if (info->zero == 1)
+		while (i < info->biggest)
+			tmp[i++] = '0';
+	else
+		while (i < info->biggest)
+			tmp[i++] = ' ';
 	f = i - ft_strlen(arg);
 	if (info->pnt == 1 && info->nbz < ft_strlen(arg))
 	{
