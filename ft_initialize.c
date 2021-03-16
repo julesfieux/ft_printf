@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/15 16:11:19 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/16 12:06:52 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	*ft_init_flag(int len_flag, t_struct *info)
 		return (NULL);
 	flag[len_flag] = '\0';
 	len_flag--;
-	if (info->letter == 'c' || info->letter == 'p')
-		if (ft_verif_cp(&flag, len_flag, info) != 0)
+	if (info->letter == 'c')
+		if (ft_verif_c(&flag, len_flag, info) != 0)
 		{
 			free(flag);
 			return (NULL);
@@ -59,9 +59,9 @@ char	*ft_init_flag(int len_flag, t_struct *info)
 			free(flag);
 			return (NULL);
 		}
-	if (info->letter == 's' || info->letter == 'x' || info->letter == 'X' ||
-	info->letter == 'u')
-		if (ft_verif_suxX(&flag, len_flag, info, 1) != 0)
+	if (info->letter == 's' || info->letter == 'p' || info->letter == 'x' ||
+	info->letter == 'X' || info->letter == 'u')
+		if (ft_verif_spuxX(&flag, len_flag, info, 1) != 0)
 		{
 			free(flag);
 			return (NULL);

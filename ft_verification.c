@@ -6,13 +6,13 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:46:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/12 12:08:08 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/16 12:07:11 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_verif_cp(char **flag_ref, int len_flag, t_struct *info)
+int		ft_verif_c(char **flag_ref, int len_flag, t_struct *info)
 {
 	int i;
 	char	*flag;
@@ -20,8 +20,6 @@ int		ft_verif_cp(char **flag_ref, int len_flag, t_struct *info)
 	flag = *flag_ref;
 	i = 1;
 	if (info->letter == 'c' && info->l > 2)
-		return (-1);
-	if (info->letter == 'p' && info->l > 0)
 		return (-1);
 	if (info->data[info->cnt - i] == '.')
 	{
@@ -117,13 +115,15 @@ int		ft_verif_id(char **flag_ref, int len_flag, t_struct *info, int i)
 	return (0);
 }
 
-int		ft_verif_suxX(char **flag_ref, int len_flag, t_struct *info, int i)
+int		ft_verif_spuxX(char **flag_ref, int len_flag, t_struct *info, int i)
 {
 	char	*flag;
 
 	flag = *flag_ref;
 	if ((info->letter == 'u' || info->letter == 'x' || info->letter == 'X' ||
 	info->letter == 's') && info->l > 2)
+		return (-1);
+	if (info->letter == 'p' && info->l > 0)
 		return (-1);
 	if (info->data[info->cnt - i] == '*')
 	{
