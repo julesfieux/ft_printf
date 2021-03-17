@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:46:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/16 12:07:11 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/17 11:34:02 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_verif_c(char **flag_ref, int len_flag, t_struct *info)
 {
-	int i;
+	int		i;
 	char	*flag;
 
 	flag = *flag_ref;
@@ -56,7 +56,7 @@ int		ft_verif_c(char **flag_ref, int len_flag, t_struct *info)
 }
 
 int		ft_verif_id(char **flag_ref, int len_flag, t_struct *info, int i)
-{	
+{
 	char	*flag;
 
 	flag = *flag_ref;
@@ -115,7 +115,7 @@ int		ft_verif_id(char **flag_ref, int len_flag, t_struct *info, int i)
 	return (0);
 }
 
-int		ft_verif_spuxX(char **flag_ref, int len_flag, t_struct *info, int i)
+int		ft_verif_spuxx(char **flag_ref, int len_flag, t_struct *info, int i)
 {
 	char	*flag;
 

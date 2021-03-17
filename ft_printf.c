@@ -6,13 +6,13 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/16 15:26:39 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/17 10:54:14 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_parsing(t_struct *info, va_list param)
+int			ft_parsing(t_struct *info, va_list param)
 {
 	int		len_flag;
 	char	*flag;
@@ -29,7 +29,7 @@ int		ft_parsing(t_struct *info, va_list param)
 				return (-1);
 			if (!(ft_init_res(info, flag, param)))
 			{
-				free (flag);
+				free(flag);
 				return (-1);
 			}
 			free(flag);
@@ -37,6 +37,26 @@ int		ft_parsing(t_struct *info, va_list param)
 		}
 	}
 	return (0);
+}
+
+void		ft_init_struct2(t_struct *info)
+{
+	info->z_co[0] = -1;
+	info->cnt = 0;
+	info->plus = 0;
+	info->minus = 0;
+	info->space = 0;
+	info->letter = 0;
+	info->sharp = 0;
+	info->l = 0;
+	info->i = 0;
+	info->len = 0;
+	info->co = 0;
+	info->zero = 0;
+	info->pnt = 0;
+	info->nbs = 0;
+	info->nbz = 0;
+	info->biggest = 0;
 }
 
 t_struct	*ft_init_struct(const char *data, int len)
@@ -58,44 +78,15 @@ t_struct	*ft_init_struct(const char *data, int len)
 	info->res[0] = '\0';
 	if (!(info->z_co = malloc(sizeof(int) * 1)))
 		return (NULL);
-	info->z_co[0] = -1;
-	info->cnt = 0;
-	info->plus = 0;
-	info->minus = 0;
-	info->space = 0;
-	info->letter = 0;
-	info->sharp = 0;
-	info->l = 0;
-	info->i = 0;
-	info->len = 0;
-	info->co = 0;
-	info->zero = 0;
-	info->pnt = 0;
-	info->nbs = 0;
-	info->nbz = 0;
-	info->biggest = 0;
+	ft_init_struct2(info);
 	return (info);
 }
 
-int		ft_printf(const char *data, ...)
+int			ft_printf2(t_struct *info, va_list param)
 {
-	va_list 	param;
-	t_struct	*info;
-	int			len;
-	int			i;
+	int len;
+	int i;
 
-	if ((info = ft_init_struct(data, 0)) == NULL)
-		return (-1);
-	va_start(param, data);
-	if (ft_parsing(info, param) < 0)
-	{
-		va_end(param);
-		free(info->data);
-		free(info->res);
-		free(info->z_co);
-		free(info);
-		return (-1);
-	}
 	va_end(param);
 	len = ft_strlen(info->res);
 	i = 0;
@@ -113,5 +104,27 @@ int		ft_printf(const char *data, ...)
 	free(info->z_co);
 	len = info->len;
 	free(info);
+	return (len);
+}
+
+int			ft_printf(const char *data, ...)
+{
+	va_list		param;
+	t_struct	*info;
+	int			len;
+
+	if ((info = ft_init_struct(data, 0)) == NULL)
+		return (-1);
+	va_start(param, data);
+	if (ft_parsing(info, param) < 0)
+	{
+		va_end(param);
+		free(info->data);
+		free(info->res);
+		free(info->z_co);
+		free(info);
+		return (-1);
+	}
+	len = ft_printf2(info, param);
 	return (len);
 }
