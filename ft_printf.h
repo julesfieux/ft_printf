@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/17 17:21:23 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/17 17:50:04 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				ft_init_res(t_struct *info, char *flag, va_list param);
 char			*ft_fillin_strmin(t_struct *info, char *tmp);
 char			*ft_fillin_intmin(t_struct *info, char *tmp);
 char			*ft_fillin_othermin(t_struct *info, char *tmp);
-char			*ft_fillin_str(t_struct *info, char *tmp);
+char			*ft_fillin_str(t_struct *info, char *tmp, int i);
 char			*ft_fillin_other(t_struct *info, char *tmp);
 char			*ft_fillin_int(t_struct *info, char *tmp);
 char			*ft_strjoin(char *s1, char *s2, t_struct *info);

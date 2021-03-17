@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:07:04 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/17 17:21:41 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/17 17:50:09 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ char	*ft_fillin_all(t_struct *info)
 	else
 	{
 		if (info->letter == 's')
-			tmp = ft_fillin_str(info, tmp);
+			tmp = ft_fillin_str(info, tmp, 0);
 		else if (info->letter == 'i' || info->letter == 'd')
 			tmp = ft_fillin_int(info, tmp);
 		else
