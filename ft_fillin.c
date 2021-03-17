@@ -6,13 +6,13 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/16 15:53:04 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/17 17:11:02 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_fillin_strmin(t_struct *info, char *tmp, char *arg)
+char	*ft_fillin_strmin(t_struct *info, char *tmp)
 {
 	int		i;
 	int		len_arg;
@@ -21,19 +21,19 @@ char	*ft_fillin_strmin(t_struct *info, char *tmp, char *arg)
 	tmp[info->biggest] = '\0';
 	while (i < info->biggest)
 		tmp[i++] = ' ';
-	len_arg = ft_strlen(arg);
+	len_arg = ft_strlen(info->arg);
 	if (info->pnt == 1 && info->nbz < len_arg)
 		len_arg = info->nbz;
 	i = 0;
 	while (i < len_arg)
 	{
-		tmp[i] = arg[i];
+		tmp[i] = info->arg[i];
 		i++;
 	}
 	return (tmp);
 }
 
-char	*ft_fillin_othermin(t_struct *info, char *tmp, char *arg)
+char	*ft_fillin_othermin(t_struct *info, char *tmp)
 {
 	int		i;
 	int		f;
@@ -45,7 +45,7 @@ char	*ft_fillin_othermin(t_struct *info, char *tmp, char *arg)
 		tmp[i++] = ' ';
 	i = 0;
 	if ((info->letter == 'x' || info->letter == 'X') && info->sharp == 1 &&
-	arg[0] != '0')
+	info->arg[0] != '0')
 	{
 		tmp[i++] = '0';
 		if (info->letter == 'x')
@@ -58,16 +58,16 @@ char	*ft_fillin_othermin(t_struct *info, char *tmp, char *arg)
 	else
 		while (i < info->nbz)
 			tmp[i++] = '0';
-	if (info->nbz > ft_strlen(arg))
-		f = i - ft_strlen(arg);
+	if (info->nbz > ft_strlen(info->arg))
+		f = i - ft_strlen(info->arg);
 	i = 0;
-	if (info->letter == 'c' && !arg[0])
+	if (info->letter == 'c' && !info->arg[0])
 	{
 		info->co = f;
 		tmp[f++] = ' ';
 	}
 	else if ((info->letter == 'u' || info->letter == 'x' || info->letter == 'X')
-	&& info->nbz == 0 && info->pnt == 1 && arg[0] == '0')
+	&& info->nbz == 0 && info->pnt == 1 && info->arg[0] == '0')
 	{
 		if (info->nbs == 0)
 			tmp[f] = 0;
@@ -76,15 +76,15 @@ char	*ft_fillin_othermin(t_struct *info, char *tmp, char *arg)
 	else
 	{
 		if ((info->letter == 'x' || info->letter == 'X') && info->sharp == 1 &&
-		arg[0] != '0' && info->nbz <= ft_strlen(arg))
+		info->arg[0] != '0' && info->nbz <= ft_strlen(info->arg))
 			f = f + 2;
-		while (arg[i])
-			tmp[f++] = arg[i++];
+		while (info->arg[i])
+			tmp[f++] = info->arg[i++];
 	}
 	return (tmp);
 }
 
-char	*ft_fillin_str(t_struct *info, char *tmp, char *arg)
+char	*ft_fillin_str(t_struct *info, char *tmp)
 {
 	int		i;
 	int		f;
@@ -97,24 +97,24 @@ char	*ft_fillin_str(t_struct *info, char *tmp, char *arg)
 	else
 		while (i < info->biggest)
 			tmp[i++] = ' ';
-	f = i - ft_strlen(arg);
-	if (info->pnt == 1 && info->nbz < ft_strlen(arg))
+	f = i - ft_strlen(info->arg);
+	if (info->pnt == 1 && info->nbz < ft_strlen(info->arg))
 	{
 		f = i - info->nbz;
 		i = 0;
 		while (i < info->nbz)
-			tmp[f++] = arg[i++];
+			tmp[f++] = info->arg[i++];
 	}
 	else
 	{
 		i = 0;
-		while (arg[i])
-			tmp[f++] = arg[i++];
+		while (info->arg[i])
+			tmp[f++] = info->arg[i++];
 	}
 	return (tmp);
 }
 
-char	*ft_fillin_other(t_struct *info, char *tmp, char *arg)
+char	*ft_fillin_other(t_struct *info, char *tmp)
 {
 	int		i;
 	int		f;
@@ -124,16 +124,16 @@ char	*ft_fillin_other(t_struct *info, char *tmp, char *arg)
 	tmp_nbz = info->nbz;
 	tmp[info->biggest] = '\0';
 	if (info->letter == 'p' && info->nbs <= info->nbz &&
-	info->nbs <= ft_strlen(arg))
+	info->nbs <= ft_strlen(info->arg))
 	{
 		while (i < 2)
 		{
-			tmp[i] = arg[i];
+			tmp[i] = info->arg[i];
 			i++;
 		}
 	}
 	if ((info->letter == 'x' || info->letter == 'X') && info->sharp == 1 &&
-	arg[0] != '0')
+	info->arg[0] != '0')
 	{
 		tmp[i++] = '0';
 		if (info->letter == 'x')
@@ -153,12 +153,12 @@ char	*ft_fillin_other(t_struct *info, char *tmp, char *arg)
 		i = 0;
 	while (tmp[i] != '\0')
 		i++;
-	f = i - ft_strlen(arg);
+	f = i - ft_strlen(info->arg);
 	i = 0;
-	if (info->letter == 'c' && !arg[0])
+	if (info->letter == 'c' && !info->arg[0])
 		info->co = f - 1;
 	else if ((info->letter == 'u' || info->letter == 'x' || info->letter == 'X')
-	&& tmp_nbz == 0 && info->pnt == 1 && arg[0] == '0')
+	&& tmp_nbz == 0 && info->pnt == 1 && info->arg[0] == '0')
 	{
 		if (info->nbs == 0)
 			tmp[f] = 0;
@@ -167,28 +167,28 @@ char	*ft_fillin_other(t_struct *info, char *tmp, char *arg)
 	else
 	{
 		if (info->letter == 'p' && tmp_nbz == 0 && info->pnt == 1 &&
-		arg[0] == '0')
+		info->arg[0] == '0')
 		{
 			f++;
 			while (f < info->biggest)
-				tmp[f++] = arg[i++];
+				tmp[f++] = info->arg[i++];
 		}
 		else
 		{
 			if (info->letter == 'p' && info->nbs <= tmp_nbz &&
-			info->nbs <= ft_strlen(arg))
+			info->nbs <= ft_strlen(info->arg))
 			{
 				f = f + 2;
 				i = i + 2;
 			}
-			while (arg[i])
-				tmp[f++] = arg[i++];
+			while (info->arg[i])
+				tmp[f++] = info->arg[i++];
 		}
 	}
 	return (tmp);
 }
 
-char	*ft_fillin_intmin(t_struct *info, char *tmp, char *arg)
+char	*ft_fillin_intmin(t_struct *info, char *tmp)
 {
 	int		i;
 	int		f;
@@ -199,7 +199,7 @@ char	*ft_fillin_intmin(t_struct *info, char *tmp, char *arg)
 	while (i < info->biggest)
 		tmp[i++] = ' ';
 	i = 0;
-	if (arg[0] == '-')
+	if (info->arg[0] == '-')
 	{
 		tmp[i++] = '-';
 		info->nbz++;
@@ -213,10 +213,10 @@ char	*ft_fillin_intmin(t_struct *info, char *tmp, char *arg)
 		i++;
 	while (i < info->nbz)
 		tmp[i++] = '0';
-	if (info->nbz > ft_strlen(arg))
-		f = i - ft_strlen(arg);
+	if (info->nbz > ft_strlen(info->arg))
+		f = i - ft_strlen(info->arg);
 	i = 0;
-	if (arg[0] == '-')
+	if (info->arg[0] == '-')
 	{
 		f++;
 		i++;
@@ -225,81 +225,95 @@ char	*ft_fillin_intmin(t_struct *info, char *tmp, char *arg)
 		f++;
 	else if (info->space == 1)
 		f++;
-	if (info->space == 1 && info->nbz == 0 && arg[0] == '0' && info->pnt == 1)
+	if (info->space == 1 && info->nbz == 0 && info->arg[0] == '0' && info->pnt == 1)
 		return (tmp);
-	if (arg[0] == '0' && info->pnt == 1 && info->space == 0)
+	if (info->arg[0] == '0' && info->pnt == 1 && info->space == 0)
 		return (tmp);
-	while (arg[i])
-		tmp[f++] = arg[i++];
+	while (info->arg[i])
+		tmp[f++] = info->arg[i++];
 	return (tmp);
 }
 
-char	*ft_fillin_int(t_struct *info, char *tmp, char *arg)
+char	*ft_fillin_int1(t_struct *info, char *tmp, int *i)
+{
+	int f;
+
+	tmp[info->biggest] = '\0';
+	while ((*i) < info->biggest)
+		tmp[(*i)++] = ' ';
+	(*i)--;
+	f = info->nbz;
+	while (f > 0)
+	{
+		tmp[(*i)--] = '0';
+		f--;
+	}
+	if ((*i) < 0)
+		(*i) = 0;
+	if (info->arg[0] == '-')
+	{
+		if (ft_strlen(info->arg) > info->nbz)
+		{
+			while (tmp[(*i)])
+				(*i)++;
+			(*i) = (*i) - ft_strlen(info->arg);
+		}
+		tmp[(*i)] = '-';
+	}
+	return (tmp);
+}
+
+char	*ft_fillin_int2(t_struct *info, char *tmp, int *i, int *f)
+{
+	if (info->space == 1 && info->plus != 1 && info->arg[0] != '-')
+	{
+		if (ft_strlen(info->arg) > info->nbz)
+		{
+			while (tmp[(*i)])
+				(*i)++;
+			(*i) = (*i) - (ft_strlen(info->arg) + 1);
+		}
+		if (info->arg[0] == '0' && info->pnt == 1 && info->nbs == 0 && info->nbz == 0)
+			(*i)++;
+		tmp[(*i)] = ' ';
+	}
+	while (tmp[(*i)])
+		(*i)++;
+	(*f) = (*i) - ft_strlen(info->arg);
+	(*i) = 0;
+	if (info->arg[0] == '-')
+	{
+		(*f)++;
+		(*i)++;
+	}
+	return (tmp);
+}
+
+char	*ft_fillin_int(t_struct *info, char *tmp)
 {
 	int		i;
 	int		f;
 
 	i = 0;
-	tmp[info->biggest] = '\0';
-	while (i < info->biggest)
-		tmp[i++] = ' ';
-	i--;
-	f = info->nbz;
-	while (f > 0)
+	tmp = ft_fillin_int1(info, tmp, &i);
+	if (info->plus == 1 && info->arg[0] != '-')
 	{
-		tmp[i--] = '0';
-		f--;
-	}
-	if (i < 0)
-		i = 0;
-	if (arg[0] == '-')
-	{
-		if (ft_strlen(arg) > info->nbz)
+		if (ft_strlen(info->arg) > info->nbz)
 		{
 			while (tmp[i])
 				i++;
-			i = i - ft_strlen(arg);
+			i = i - (ft_strlen(info->arg) + 1);
 		}
-		tmp[i] = '-';
-	}
-	else if (info->plus == 1)
-	{
-		if (ft_strlen(arg) > info->nbz)
-		{
-			while (tmp[i])
-				i++;
-			i = i - (ft_strlen(arg) + 1);
-		}
-		if (arg[0] == '0' && info->pnt == 1 && info->nbs == 0 && info->nbz == 0)
+		if (info->arg[0] == '0' && info->pnt == 1 && info->nbs == 0 && info->nbz == 0)
 			i++;
 		tmp[i] = '+';
 	}
-	else if (info->space == 1)
-	{
-		if (ft_strlen(arg) > info->nbz)
-		{
-			while (tmp[i])
-				i++;
-			i = i - (ft_strlen(arg) + 1);
-		}
-		if (arg[0] == '0' && info->pnt == 1 && info->nbs == 0 && info->nbz == 0)
-			i++;
-		tmp[i] = ' ';
-	}
-	while (tmp[i])
-		i++;
-	f = i - ft_strlen(arg);
-	i = 0;
-	if (arg[0] == '-')
-	{
-		f++;
-		i++;
-	}
-	if (info->space == 1 && info->nbz == 0 && arg[0] == '0' && info->pnt == 1)
+	tmp = ft_fillin_int2(info, tmp, &i, &f);
+	if (info->space == 1 && info->nbz == 0 && info->arg[0] == '0' && info->pnt == 1)
 		return (tmp);
-	if (arg[0] == '0' && info->pnt == 1 && info->space == 0)
+	if (info->arg[0] == '0' && info->pnt == 1 && info->space == 0)
 		return (tmp);
-	while (arg[i])
-		tmp[f++] = arg[i++];
+	while (info->arg[i])
+		tmp[f++] = info->arg[i++];
 	return (tmp);
 }

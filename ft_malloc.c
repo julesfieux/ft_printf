@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:52:21 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/16 14:52:54 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/17 17:21:12 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ char	*ft_umalres(unsigned long long int num, char *res, int *i)
 	return (res);
 }
 
-char	*ft_malloc_tmp(t_struct *info, char *arg)
+char	*ft_malloc_tmp(t_struct *info)
 {
 	char *tmp;
 	int		len_arg;
 
-	len_arg = ft_strlen(arg);
+	len_arg = ft_strlen(info->arg);
 	info->biggest = info->nbs;
 	if (info->letter == 's')
 	{
@@ -85,16 +85,16 @@ char	*ft_malloc_tmp(t_struct *info, char *arg)
 			info->biggest = len_arg;
 		if (info->letter == 'i' || info->letter == 'd')
 		{
-			if (arg[0] == '-' && info->nbs <= info->nbz && info->nbz > len_arg
+			if (info->arg[0] == '-' && info->nbs <= info->nbz && info->nbz > len_arg
 			&& info->pnt == 1)
 				info->biggest++;
-			if (len_arg > info->nbs && len_arg > info->nbz && arg[0] == '0' &&
+			if (len_arg > info->nbs && len_arg > info->nbz && info->arg[0] == '0' &&
 			info->pnt == 1 && info->space == 0)
 				info->biggest--;
 			if (info->plus == 1 && len_arg >= info->nbs
-			&& arg[0] != '-')
+			&& info->arg[0] != '-')
 				info->biggest++;
-			if (info->space == 1 && arg[0] != '-' && info->plus == 0 && 
+			if (info->space == 1 && info->arg[0] != '-' && info->plus == 0 && 
 			info->zero == 0 && (len_arg >= info->nbs ||
 			info->nbz >= info->nbs))
 			{
@@ -105,7 +105,7 @@ char	*ft_malloc_tmp(t_struct *info, char *arg)
 			}
 		}
 		if ((info->letter == 'x' || info->letter == 'X') && info->sharp == 1 &&
-		arg[0] != '0')
+		info->arg[0] != '0')
 		{
 			if (info->nbs <= info->nbz && info->nbs <= len_arg)
 				info->biggest = info->biggest + 2;
@@ -123,9 +123,9 @@ char	*ft_malloc_tmp(t_struct *info, char *arg)
 				info->biggest = info->biggest + 2;
 		}
 		if (info->letter == 'p' && info->nbz == 0 && info->pnt == 1 &&
-		arg[0] == '0' && info->nbs < len_arg)
+		info->arg[0] == '0' && info->nbs < len_arg)
 			info->biggest--;
-		if (info->letter == 'c' && !arg[0])
+		if (info->letter == 'c' && !info->arg[0])
 			info->biggest++;
 	}
 	if (!(tmp = malloc(sizeof(char) * (info->biggest + 1))))

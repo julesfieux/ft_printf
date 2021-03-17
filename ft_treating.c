@@ -6,13 +6,13 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 10:39:00 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/12 11:55:29 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/17 17:16:48 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_treat_char(char c, char **arg)
+int		ft_treat_char(char c, t_struct *info)
 {
 	char *tmp;
 
@@ -20,11 +20,11 @@ int		ft_treat_char(char c, char **arg)
 		return (0);
 	tmp[0] = c;
 	tmp[1] = '\0';
-	*arg = tmp;
+	info->arg = tmp;
 	return (1);
 }
 
-int		ft_treat_str(char *str, char **arg)
+int		ft_treat_str(char *str, t_struct *info)
 {
 	int			i;
 	char		*tmp;
@@ -52,11 +52,11 @@ int		ft_treat_str(char *str, char **arg)
 		}
 	}
 	tmp[i] = '\0';
-	*arg = tmp;
+	info->arg = tmp;
 	return (1);
 }
 
-int		ft_treat_pointer(unsigned long long adress, char **arg)
+int		ft_treat_pointer(unsigned long long adress, t_struct *info)
 {
 	int					len;
 	unsigned long long	temp;
@@ -97,45 +97,45 @@ int		ft_treat_pointer(unsigned long long adress, char **arg)
 		}
 		tmp[len] = base[adress];
 	}
-	*arg = tmp;
+	info->arg = tmp;
 	return (1);
 }
 
-int		ft_treat_int(long long int nb, char **arg)
+int		ft_treat_int(long long int nb, t_struct *info)
 {
 	int			i;
 
 	i = 0;
-	*arg = NULL;
-	if (!(*arg = ft_malres(nb, *arg, &i)))
+	info->arg = NULL;
+	if (!(info->arg = ft_malres(nb, info->arg, &i)))
 		return (0);
 	if (nb == 0)
 	{
-		*arg[0] = '0';
+		info->arg[0] = '0';
 		return (1);
 	}
-	*arg = ft_init_int(nb, *arg, i);
+	info->arg = ft_init_int(nb, info->arg, i);
 	return (1);
 }
 
-int		ft_treat_uint(unsigned long long int nb, char **arg)
+int		ft_treat_uint(unsigned long long int nb, t_struct *info)
 {
 	int			i;
 
 	i = 0;
-	*arg = NULL;
-	if (!(*arg = ft_umalres(nb, *arg, &i)))
+	info->arg = NULL;
+	if (!(info->arg = ft_umalres(nb, info->arg, &i)))
 		return (0);
 	if (nb == 0)
 	{
-		*arg[0] = '0';
+		info->arg[0] = '0';
 		return (1);
 	}
-	*arg = ft_init_uint(nb, *arg, i);
+	info->arg = ft_init_uint(nb, info->arg, i);
 	return (1);
 }
 
-int		ft_treat_hexa(unsigned long long int nb, char **arg, int maj)
+int		ft_treat_hexa(unsigned long long int nb, t_struct *info, int maj)
 {
 	int			i;
 	unsigned long long int	num;
@@ -156,10 +156,10 @@ int		ft_treat_hexa(unsigned long long int nb, char **arg, int maj)
 	if (nb == 0)
 	{
 		tmp[0] = '0';
-		*arg = tmp;
+		info->arg = tmp;
 		return (1);
 	}
 	tmp = ft_init_int_hexa(nb, tmp, maj, i);
-	*arg = tmp;
+	info->arg = tmp;
 	return (1);
 }
