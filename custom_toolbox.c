@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/18 11:06:33 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/18 11:12:51 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,22 @@ int		str_len_flag(t_struct *info)
 	return (len_flag);
 }
 
+char	*ft_init_int1(long long int num, char *res, int i)
+{
+	if (num < 0)
+	{
+		num = -num;
+		res[0] = '-';
+	}
+	while (num > 0)
+	{
+		res[i] = ((num % 10) + '0');
+		i--;
+		num = num / 10;
+	}
+	return (res);
+}
+
 char	*ft_init_int(long long int num, char *res, int i)
 {
 	long long	lim;
@@ -82,19 +98,7 @@ char	*ft_init_int(long long int num, char *res, int i)
 		}
 	}
 	else
-	{
-		if (num < 0)
-		{
-			num = -num;
-			res[0] = '-';
-		}
-		while (num > 0)
-		{
-			res[i] = ((num % 10) + '0');
-			i--;
-			num = num / 10;
-		}
-	}
+		res = ft_init_int1(num, res, i);
 	return (res);
 }
 
@@ -164,7 +168,10 @@ int		ft_nb_space(char *flag, t_struct *info, int s, va_list param)
 		nb = va_arg(param, int);
 	}
 	else
-		nb = ft_nb_space1(flag, info, nb, s);
+	{
+		if ((nb = ft_nb_space1(flag, info, nb, s)) < 0)
+			return (-1);
+	}
 	if (nb < 0)
 	{
 		nb = -nb;
@@ -207,7 +214,10 @@ int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
 			i = 0;
 	}
 	else
-		i = ft_nb_zero1(flag, s, f, i);
+	{
+		if ((i = ft_nb_zero1(flag, s, f, i)) < 0)
+			return (-1);
+	}
 	if (i < 0)
 	{
 		if (info->letter == 's')
