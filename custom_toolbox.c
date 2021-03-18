@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/18 11:00:21 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/18 11:06:33 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,32 +133,38 @@ char	*ft_init_int_hexa(unsigned long long int num, char *res, int maj, int i)
 	return (res);
 }
 
-int		ft_nb_space(char *flag, t_struct *info, int s, va_list param)
+int		ft_nb_space1(char *flag, t_struct *info, int nb, int s)
 {
 	char	*temp;
+
+	while (flag[info->i + s] >= '0' && flag[info->i + s] <= '9')
+		info->i++;
+	if (!(temp = malloc(sizeof(char) * (info->i + 1))))
+		return (-1);
+	info->i = 0;
+	while (flag[info->i + s] >= '0' && flag[info->i + s] <= '9')
+	{
+		temp[info->i] = flag[info->i + s];
+		info->i++;
+	}
+	temp[info->i] = '\0';
+	nb = ft_atoi(temp);
+	free(temp);
+	return (nb);
+}
+
+int		ft_nb_space(char *flag, t_struct *info, int s, va_list param)
+{
 	int		nb;
 
+	nb = 0;
 	if (flag[info->i + s] == '*')
 	{
 		info->i++;
 		nb = va_arg(param, int);
 	}
 	else
-	{
-		while (flag[info->i + s] >= '0' && flag[info->i + s] <= '9')
-			info->i++;
-		if (!(temp = malloc(sizeof(char) * (info->i + 1))))
-			return (-1);
-		info->i = 0;
-		while (flag[info->i + s] >= '0' && flag[info->i + s] <= '9')
-		{
-			temp[info->i] = flag[info->i + s];
-			info->i++;
-		}
-		temp[info->i] = '\0';
-		nb = ft_atoi(temp);
-		free(temp);
-	}
+		nb = ft_nb_space1(flag, info, nb, s);
 	if (nb < 0)
 	{
 		nb = -nb;
