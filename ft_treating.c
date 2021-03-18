@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 10:39:00 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/18 11:43:22 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/18 11:51:23 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int		ft_treat_pointer(unsigned long long adress, t_struct *info)
 		}
 		tmp[len] = '\0';
 	}
+	else
+		tmp = NULL;
 	tmp = ft_treat_pointer1(adress, len, tmp);
 	info->arg = tmp;
 	return (1);
