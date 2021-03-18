@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/18 10:29:14 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/18 10:37:46 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,8 +261,6 @@ char	*ft_fillin_intmin(t_struct *info, char *tmp)
 		return (tmp);
 	if (info->arg[0] == '0' && info->pnt == 1 && info->space == 0)
 		return (tmp);
-	printf("i = %d\n", i);
-	printf("f = %d\n", f);
 	while (info->arg[i])
 		tmp[f++] = info->arg[i++];
 	return (tmp);
