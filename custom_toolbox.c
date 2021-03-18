@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/16 15:52:54 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/18 10:48:49 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		str_len_flag(t_struct *info)
 		info->cnt++;
 	}
 	while (info->data[info->cnt] == '0' || info->data[info->cnt] == '-' ||
-	info->data[info->cnt] == '+' || info->data[info->cnt] == ' ' || 
+	info->data[info->cnt] == '+' || info->data[info->cnt] == ' ' ||
 	info->data[info->cnt] == 'l')
 	{
 		if (info->data[info->cnt] == '-')
@@ -52,8 +52,10 @@ int		str_len_flag(t_struct *info)
 		if (info->data[info->cnt] != '0' || info->data[info->cnt + 1] == '.')
 			len_flag++;
 		else
+		{
 			if (info->pnt == 0 || info->letter == 's')
 				info->zero = 1;
+		}
 		info->cnt++;
 	}
 	while (ft_isletter(info->data[info->cnt]) != 1 && info->data[info->cnt])
@@ -66,8 +68,8 @@ int		str_len_flag(t_struct *info)
 
 char	*ft_init_int(long long int num, char *res, int i)
 {
-	long long lim;
-	const char *limit = "-9223372036854775808";
+	long long	lim;
+	const char	*limit = "-9223372036854775808";
 
 	lim = -9223372036854775807;
 	if (num == (lim - 1))
@@ -165,21 +167,11 @@ int		ft_nb_space(char *flag, t_struct *info, int s, va_list param)
 	return (nb);
 }
 
-int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
+int		ft_nb_zero1(char *flag, int s, int f, int i)
 {
 	char	*temp;
-	int		f;
-	int		i;
 
-	f = 0;
-	i = info->i;
-	if (flag[i + s] == '*')
-	{
-		i = va_arg(param, int);
-		if (i < 0 && info->letter != 's')
-			i = 0;
-	}
-	else
+	if (flag[i + s] != '*')
 	{
 		while (flag[i + s] >= '0' && flag[s + i++] <= '9')
 			f++;
@@ -195,6 +187,23 @@ int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
 		i = ft_atoi(temp);
 		free(temp);
 	}
+	return (i);
+}
+
+int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
+{
+	int		f;
+	int		i;
+
+	f = 0;
+	i = info->i;
+	if (flag[i + s] == '*')
+	{
+		i = va_arg(param, int);
+		if (i < 0 && info->letter != 's')
+			i = 0;
+	}
+	i = ft_nb_zero1(flag, s, f, i);
 	if (i < 0)
 	{
 		if (info->letter == 's')
@@ -222,7 +231,7 @@ int		ft_z_co(t_struct *info)
 	}
 	tmp[i] = info->co + ft_strlen(info->res);
 	tmp[i + 1] = -1;
-	free (info->z_co);
+	free(info->z_co);
 	info->z_co = tmp;
 	return (1);
 }
