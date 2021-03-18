@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 10:39:00 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/18 11:51:23 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/18 12:04:09 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ int		ft_treat_char(char c, t_struct *info)
 	tmp[1] = '\0';
 	info->arg = tmp;
 	return (1);
+}
+
+char	*ft_treat_str1(char *str, int i, char *tmp)
+{
+	while (str[i])
+	{
+		tmp[i] = str[i];
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
 }
 
 int		ft_treat_str(char *str, t_struct *info)
@@ -40,18 +51,14 @@ int		ft_treat_str(char *str, t_struct *info)
 			tmp[i] = null[i];
 			i++;
 		}
+		tmp[i] = '\0';
 	}
 	else
 	{
 		if (!(tmp = malloc(sizeof(char) * (ft_strlen(str) + 1))))
 			return (0);
-		while (str[i])
-		{
-			tmp[i] = str[i];
-			i++;
-		}
+		tmp = ft_treat_str1(str, i, tmp);
 	}
-	tmp[i] = '\0';
 	info->arg = tmp;
 	return (1);
 }
