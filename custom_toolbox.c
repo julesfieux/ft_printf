@@ -6,16 +6,14 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/18 11:12:51 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/18 11:20:40 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		str_len_flag(t_struct *info)
+int		str_len_flag1(t_struct *info, int len_flag)
 {
-	int len_flag;
-
 	info->cnt++;
 	len_flag = info->cnt;
 	info->plus = 0;
@@ -27,16 +25,11 @@ int		str_len_flag(t_struct *info)
 			info->pnt = 1;
 		info->cnt++;
 	}
-	if (!info->data[info->cnt])
-		return (-1);
-	info->letter = info->data[info->cnt];
-	info->cnt = len_flag;
-	len_flag = 0;
-	if (info->data[info->cnt] == '#')
-	{
-		info->sharp = 1;
-		info->cnt++;
-	}
+	return (len_flag);
+}
+
+int		str_len_flag2(t_struct *info, int len_flag)
+{
 	while (info->data[info->cnt] == '0' || info->data[info->cnt] == '-' ||
 	info->data[info->cnt] == '+' || info->data[info->cnt] == ' ' ||
 	info->data[info->cnt] == 'l')
@@ -58,6 +51,26 @@ int		str_len_flag(t_struct *info)
 		}
 		info->cnt++;
 	}
+	return (len_flag);
+}
+
+int		str_len_flag(t_struct *info)
+{
+	int len_flag;
+
+	len_flag = 0;
+	len_flag = str_len_flag1(info, len_flag);
+	if (!info->data[info->cnt])
+		return (-1);
+	info->letter = info->data[info->cnt];
+	info->cnt = len_flag;
+	len_flag = 0;
+	if (info->data[info->cnt] == '#')
+	{
+		info->sharp = 1;
+		info->cnt++;
+	}
+	len_flag = str_len_flag2(info, len_flag);
 	while (ft_isletter(info->data[info->cnt]) != 1 && info->data[info->cnt])
 	{
 		info->cnt++;
