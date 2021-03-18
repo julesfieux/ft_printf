@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/18 10:48:49 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/18 11:00:21 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,22 +171,19 @@ int		ft_nb_zero1(char *flag, int s, int f, int i)
 {
 	char	*temp;
 
-	if (flag[i + s] != '*')
-	{
-		while (flag[i + s] >= '0' && flag[s + i++] <= '9')
-			f++;
-		if (!f)
-			return (0);
-		if (!(temp = malloc(sizeof(char) * (f + 1))))
-			return (-1);
-		i = i - f;
-		f = 0;
-		while (flag[i + s] >= '0' && flag[i + s] <= '9')
-			temp[f++] = flag[s + i++];
-		temp[f] = '\0';
-		i = ft_atoi(temp);
-		free(temp);
-	}
+	while (flag[i + s] >= '0' && flag[s + i++] <= '9')
+		f++;
+	if (!f)
+		return (0);
+	if (!(temp = malloc(sizeof(char) * (f + 1))))
+		return (-1);
+	i = i - f;
+	f = 0;
+	while (flag[i + s] >= '0' && flag[i + s] <= '9')
+		temp[f++] = flag[s + i++];
+	temp[f] = '\0';
+	i = ft_atoi(temp);
+	free(temp);
 	return (i);
 }
 
@@ -203,7 +200,8 @@ int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
 		if (i < 0 && info->letter != 's')
 			i = 0;
 	}
-	i = ft_nb_zero1(flag, s, f, i);
+	else
+		i = ft_nb_zero1(flag, s, f, i);
 	if (i < 0)
 	{
 		if (info->letter == 's')
