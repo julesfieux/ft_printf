@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/17 12:15:04 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/19 11:22:28 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_struct	*ft_init_struct(const char *data, int len)
 	return (info);
 }
 
-int			ft_printf2(t_struct *info, va_list param)
+int			ft_print(t_struct *info, va_list param)
 {
 	int len;
 	int i;
@@ -125,6 +125,6 @@ int			ft_printf(const char *data, ...)
 		free(info);
 		return (-1);
 	}
-	len = ft_printf2(info, param);
+	len = ft_print(info, param);
 	return (len);
 }
