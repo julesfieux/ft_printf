@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 11:37:38 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/24 13:00:12 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/24 19:08:27 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*ft_fillin_othermin1(t_struct *info, char *tmp, int *i, int *f)
 		tmp[(*f)++] = ' ';
 	}
 	else if ((info->letter == 'u' || info->letter == 'x' || info->letter == 'X')
-	&& info->nbz == 0 && info->pnt == 1 && info->arg[0] == '0')
+	&& info->nbz == 0 && info->pnt == 1 && info->arg[0] == '0' &&
+	info->star_min == 0)
 	{
 		if (info->nbs == 0)
 			tmp[(*f)] = 0;
