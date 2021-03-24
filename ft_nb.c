@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:06:35 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/19 10:39:59 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/24 11:42:39 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int		ft_nb_zero(char *flag, t_struct *info, int s, va_list param)
 	if (flag[i + s] == '*')
 	{
 		i = va_arg(param, int);
+		if (i < 0)
+			info->star_min = 1;
 		if (i < 0 && info->letter != 's')
 			i = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:54:59 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/19 11:24:50 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/24 11:44:23 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_struct
 	int			sharp;
 	int			l;
 	char		letter;
+	int			star_min;
 	int			i;
 	int			len;
 	int			*z_co;

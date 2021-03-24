@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:55:27 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/19 11:22:28 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/24 11:39:38 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void		ft_init_struct2(t_struct *info)
 	info->nbs = 0;
 	info->nbz = 0;
 	info->biggest = 0;
+	info->star_min = 0;
 }
 
 t_struct	*ft_init_struct(const char *data, int len)
