@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:16:58 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/19 10:54:21 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/24 13:40:25 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		str_len_flag2(t_struct *info, int len_flag)
 			len_flag++;
 		else
 		{
-			if (info->pnt == 0 || info->letter == 's')
+			if (info->pnt == 0 || info->letter == 's' || info->nbz == 0)
 				info->zero = 1;
 		}
 		info->cnt++;

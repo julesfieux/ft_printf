@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 15:57:17 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/19 10:53:50 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/24 17:36:25 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,15 @@ void	ft_nbz_equal_nbs(char *flag, t_struct *info, int s)
 				info->nbz = info->nbs;
 			else
 			{
-				if (info->arg[0] == '0')
+				if (info->arg[0] == '0' || info->nbz == 0)
 					info->nbz = info->nbs;
 			}
 		}
+	}
+	else
+	{
+		if (info->nbz == 0 && info->zero == 1 && info->minus == 0 &&
+		info->star_min == 1)
+			info->nbz = info->nbs;
 	}
 }
