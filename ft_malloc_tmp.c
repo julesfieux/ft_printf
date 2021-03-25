@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:43:39 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/24 20:55:36 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/25 10:43:17 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ void	ft_malloc_tmp3(t_struct *info, int len_arg)
 	{
 		if (info->nbs <= info->nbz && info->nbs <= len_arg)
 			info->biggest = info->biggest + 2;
-		else if (info->nbs <= info->nbz + 2 && info->nbz >= len_arg)
+		else if (info->nbs <= info->nbz + 2 && info->nbz >= len_arg &&
+		(info->zero == 0 || info->minus == 1))
 			info->biggest = info->biggest + ((info->nbz + 2) - info->nbs);
-		else if (info->nbs <= len_arg + 2 && len_arg >= info->nbz)
+		else if (info->nbs <= len_arg + 2 && (len_arg + 1) >= info->nbz)
 			info->biggest = info->biggest + ((len_arg + 2) - info->nbs);
 	}
 	if (info->letter == 'p')

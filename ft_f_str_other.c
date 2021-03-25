@@ -6,7 +6,7 @@
 /*   By: jfieux <jfieux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 10:35:32 by jfieux            #+#    #+#             */
-/*   Updated: 2021/03/24 20:58:18 by jfieux           ###   ########.fr       */
+/*   Updated: 2021/03/25 10:08:02 by jfieux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ char	*ft_fillin_other1(t_struct *info, char *tmp, int *i)
 
 char	*ft_fillin_other2(t_struct *info, char *tmp, int *i, int *f)
 {
+	if (info->nbs <= info->nbz + 2 && info->nbz >= ft_strlen(info->arg) &&
+	info->zero == 1 && info->sharp == 1 && info->arg[0] != '0' &&
+	(info->letter == 'x' || info->letter == 'X' || info->letter == 'u'))
+		info->nbz = info->nbz - 2;
 	while (info->nbz > 0)
 	{
 		tmp[(*i)--] = '0';
